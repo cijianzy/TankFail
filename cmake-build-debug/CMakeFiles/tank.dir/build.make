@@ -60,15 +60,15 @@ include CMakeFiles/tank.dir/flags.make
 CMakeFiles/tank.dir/main.cpp.o: CMakeFiles/tank.dir/flags.make
 CMakeFiles/tank.dir/main.cpp.o: ../main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cijian/CLionProjects/tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tank.dir/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tank.dir/main.cpp.o -c /Users/cijian/CLionProjects/tank/main.cpp
+	gcc  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tank.dir/main.cpp.o -c /Users/cijian/CLionProjects/tank/main.cpp
 
 CMakeFiles/tank.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tank.dir/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cijian/CLionProjects/tank/main.cpp > CMakeFiles/tank.dir/main.cpp.i
+	gcc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cijian/CLionProjects/tank/main.cpp > CMakeFiles/tank.dir/main.cpp.i
 
 CMakeFiles/tank.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tank.dir/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cijian/CLionProjects/tank/main.cpp -o CMakeFiles/tank.dir/main.cpp.s
+	gcc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cijian/CLionProjects/tank/main.cpp -o CMakeFiles/tank.dir/main.cpp.s
 
 CMakeFiles/tank.dir/main.cpp.o.requires:
 
@@ -90,6 +90,9 @@ tank_EXTERNAL_OBJECTS =
 
 tank: CMakeFiles/tank.dir/main.cpp.o
 tank: CMakeFiles/tank.dir/build.make
+tank: /usr/local/lib/libboost_filesystem-mt.dylib
+tank: /usr/local/lib/libboost_system-mt.dylib
+tank: /usr/local/lib/libboost_regex-mt.dylib
 tank: CMakeFiles/tank.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cijian/CLionProjects/tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable tank"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tank.dir/link.txt --verbose=$(VERBOSE)
