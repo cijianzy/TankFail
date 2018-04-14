@@ -33,7 +33,8 @@ else()
 endif()
 
 
-add_executable(tank main.cpp)
+#add_executable(tank main.cpp)
+add_executable(tank test.cpp)
 
 target_link_libraries(tank
         ${Boost_FILESYSTEM_LIBRARY}

@@ -57,38 +57,38 @@ include CMakeFiles/tank.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/tank.dir/flags.make
 
-CMakeFiles/tank.dir/main.cpp.o: CMakeFiles/tank.dir/flags.make
-CMakeFiles/tank.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cijian/CLionProjects/tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tank.dir/main.cpp.o"
-	gcc  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tank.dir/main.cpp.o -c /Users/cijian/CLionProjects/tank/main.cpp
+CMakeFiles/tank.dir/test.cpp.o: CMakeFiles/tank.dir/flags.make
+CMakeFiles/tank.dir/test.cpp.o: ../test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cijian/CLionProjects/tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tank.dir/test.cpp.o"
+	gcc  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tank.dir/test.cpp.o -c /Users/cijian/CLionProjects/tank/test.cpp
 
-CMakeFiles/tank.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tank.dir/main.cpp.i"
-	gcc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cijian/CLionProjects/tank/main.cpp > CMakeFiles/tank.dir/main.cpp.i
+CMakeFiles/tank.dir/test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tank.dir/test.cpp.i"
+	gcc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cijian/CLionProjects/tank/test.cpp > CMakeFiles/tank.dir/test.cpp.i
 
-CMakeFiles/tank.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tank.dir/main.cpp.s"
-	gcc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cijian/CLionProjects/tank/main.cpp -o CMakeFiles/tank.dir/main.cpp.s
+CMakeFiles/tank.dir/test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tank.dir/test.cpp.s"
+	gcc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cijian/CLionProjects/tank/test.cpp -o CMakeFiles/tank.dir/test.cpp.s
 
-CMakeFiles/tank.dir/main.cpp.o.requires:
+CMakeFiles/tank.dir/test.cpp.o.requires:
 
-.PHONY : CMakeFiles/tank.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/tank.dir/test.cpp.o.requires
 
-CMakeFiles/tank.dir/main.cpp.o.provides: CMakeFiles/tank.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/tank.dir/main.cpp.o.provides
+CMakeFiles/tank.dir/test.cpp.o.provides: CMakeFiles/tank.dir/test.cpp.o.requires
+	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/test.cpp.o.provides.build
+.PHONY : CMakeFiles/tank.dir/test.cpp.o.provides
 
-CMakeFiles/tank.dir/main.cpp.o.provides.build: CMakeFiles/tank.dir/main.cpp.o
+CMakeFiles/tank.dir/test.cpp.o.provides.build: CMakeFiles/tank.dir/test.cpp.o
 
 
 # Object files for target tank
 tank_OBJECTS = \
-"CMakeFiles/tank.dir/main.cpp.o"
+"CMakeFiles/tank.dir/test.cpp.o"
 
 # External object files for target tank
 tank_EXTERNAL_OBJECTS =
 
-tank: CMakeFiles/tank.dir/main.cpp.o
+tank: CMakeFiles/tank.dir/test.cpp.o
 tank: CMakeFiles/tank.dir/build.make
 tank: /usr/local/lib/libboost_filesystem-mt.dylib
 tank: /usr/local/lib/libboost_system-mt.dylib
@@ -102,7 +102,7 @@ CMakeFiles/tank.dir/build: tank
 
 .PHONY : CMakeFiles/tank.dir/build
 
-CMakeFiles/tank.dir/requires: CMakeFiles/tank.dir/main.cpp.o.requires
+CMakeFiles/tank.dir/requires: CMakeFiles/tank.dir/test.cpp.o.requires
 
 .PHONY : CMakeFiles/tank.dir/requires
 

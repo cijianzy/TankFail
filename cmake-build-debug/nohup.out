@@ -1,0 +1,90 @@
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "aaef150141ea849230648e00e8350380", "employeeId": 108856}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "96b69e5beaab0ac5dc5b6c8e9739d102", "employeeId": 159806}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "73a674c6f20f728524a76e70e3155023", "employeeId": 106994}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "302905f1793852201986ff4b66b0662a", "employeeId": 136304}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "ee43acbbbc7b0422ee31765901fd6d41", "employeeId": 111651}
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 64, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 58, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 64, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 58, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 64, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 58, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 64, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 58, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 64, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 58, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "96b69e5beaab0ac5dc5b6c8e9739d102", "employeeId": 159806}
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 62, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 56, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "302905f1793852201986ff4b66b0662a", "employeeId": 136304}
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 62, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 56, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "73a674c6f20f728524a76e70e3155023", "employeeId": 106994}
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 62, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 56, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "ee43acbbbc7b0422ee31765901fd6d41", "employeeId": 111651}
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 62, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 56, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "aaef150141ea849230648e00e8350380", "employeeId": 108856}
+Traceback (most recent call last):
+  File "../tank_ai/robot-1.py", line 62, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "../tank_ai/robot-1.py", line 56, in hello
+    print(msg)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 91-92: ordinal not in range(128)

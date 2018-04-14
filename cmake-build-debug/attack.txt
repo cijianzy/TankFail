@@ -1,0 +1,1 @@
+attack func myPosition-2000 -2000targetId ai:132targetPosition: 5.71869 0 targetDirection3.90954 result: nan

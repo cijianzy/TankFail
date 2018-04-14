@@ -84,7 +84,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/cijian/CLionProjects/tank/main.cpp">
+		<Unit filename="/Users/cijian/CLionProjects/tank/test.cpp">
 			<Option target="tank"/>
 		</Unit>
 		<Unit filename="/Users/cijian/CLionProjects/tank/CMakeLists.txt">
