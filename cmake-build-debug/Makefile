@@ -123,32 +123,32 @@ tank/fast:
 	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/build
 .PHONY : tank/fast
 
-test.o: test.cpp.o
+main.o: main.cpp.o
 
-.PHONY : test.o
+.PHONY : main.o
 
 # target to build an object file
-test.cpp.o:
-	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/test.cpp.o
-.PHONY : test.cpp.o
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-test.i: test.cpp.i
+main.i: main.cpp.i
 
-.PHONY : test.i
+.PHONY : main.i
 
 # target to preprocess a source file
-test.cpp.i:
-	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/test.cpp.i
-.PHONY : test.cpp.i
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-test.s: test.cpp.s
+main.s: main.cpp.s
 
-.PHONY : test.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-test.cpp.s:
-	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/test.cpp.s
-.PHONY : test.cpp.s
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/tank.dir/build.make CMakeFiles/tank.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... tank"
-	@echo "... test.o"
-	@echo "... test.i"
-	@echo "... test.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
