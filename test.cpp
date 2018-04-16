@@ -14,8 +14,8 @@ using namespace std;
 //    system("cd ../tank_ai");
 //    system("pwd");
 //    system("bash ../tank_ai/new_game.sh");
-    return 0;
-}
+//    return 0;
+//}
 
 inline float getDistance(float x1, float y1, float x2, float y2) {
     return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));

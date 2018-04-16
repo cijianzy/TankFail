@@ -41,7 +41,7 @@ typedef client::connection_ptr connection_ptr;
 int turn = 0;
 int mapMultiple = 20;
 float tDDistance = 3; // 坦克的伤害半径
-float bDDistance = 1; // 子弹的伤害远度
+float bDDistance = 6; // 子弹的伤害远度
 
 int TDTYPE = -2;
 int BLDTYPE = -1;
@@ -55,11 +55,13 @@ vector<tuple<int,int>> bDArea;
 //perftest endpoint;
 std::set<std::string> myTankSet = {"ai:58"};
 
+int mv4Step[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
+
 inline tuple<float,float> mapCoordinateToTrue(int x, int y) {
     return make_pair((x * 1.0 / mapMultiple), (y * 1.0 / mapMultiple));
 }
 
-inline tuple<float,float> toMapCoordinate(int x, int y) {
+inline tuple<int,int> toMapCoordinate(double x, double y) {
     return make_pair(round(x * mapMultiple), round(y * mapMultiple));
 }
 
@@ -138,10 +140,14 @@ inline double angleIn2PI(double angle) {
 
 inline bool isXYSafe(double x, double y) {
 
+    tuple<int, int> tt= toMapCoordinate(x,y);
 
-    int nx = round(x);
-    int ny = round(y);
-    if (isInMapRange(x,y) && tankMap->bDMap[nx][ny] != 0) {
+    int nx = round(get<0>(tt));
+    int ny = round(get<1>(tt));
+    // TODO_CIJIAN  2018 ,Apr16 , Mon, 07:53
+    // 需要转换
+
+    if (isInMapRange(nx,ny) && tankMap->bDMap[nx][ny] != 0) {
         return false;
     } else {
         return true;
@@ -153,11 +159,12 @@ inline bool isNowSafe() {
 }
 
 inline bool isDied(Tank t) {
-    return (t.rebornCd < 0.00001);
+    return (t.rebornCd > 0.00001);
 }
 
 inline void goTo(double x, double y) {
-
+    double angle = atan2(y - myTank->y, x - myTank->x);
+    m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": " + to_string(angle/(2 * M_PI) * 360) + "}" , websocketpp::frame::opcode::text);
 }
 
 inline void testGoto() {
@@ -245,12 +252,86 @@ inline void attack() {
         }
     }
 }
+
+
+vector<vector<int>> bfsSV; // 安全区域的广度优先
+vector<vector<int>> bfsAV; // 可攻击区域的广度优先
+struct IntPosition {
+    int x, y;
+};
+
+inline void clearBfsSV() {
+    for (auto it = bfsSV.begin(); it != bfsSV.end() ; ++ it) {
+        (*it).clear();
+    }
+    bfsSV.clear();
+}
+
+inline tuple<double, double> runForLife() {
+    int bbfsSV  =  0;
+    int ebfsSV = 0;
+    clearBfsSV();
+    vector<int> tv;
+
+    int nx,ny;
+    tuple<int,int> co = toMapCoordinate(myTank->x, myTank->y);
+    nx = get<0>(co);
+    ny = get<1>(co);
+    tv.push_back(nx);
+    tv.push_back(ny);
+
+    bfsSV.push_back(tv);
+
+    while(bbfsSV <= ebfsSV) {
+        int x = bfsSV[bbfsSV][1];
+        int y = bfsSV[bbfsSV][1];
+
+        for (int i = 0 ;i < 4 ; ++ i) {
+            int nx = x + mv4Step[i][0];
+            int ny = x + mv4Step[i][1];
+
+            if (isInMapRange(nx,ny)) {
+                // 如果发现安全区域
+                if (tankMap->bDMap[nx][ny] == 0 && tankMap->dMap[nx][ny] == 0) {
+                    // 反的安全区域
+                    tuple<float, float> tureCoordinate = mapCoordinateToTrue(nx,ny);
+                    return make_pair(get<0>(tureCoordinate), get<1>(tureCoordinate));
+                }
+
+                vector<int> tv1;
+                tv1.push_back(nx);
+                tv1.push_back(ny);
+                bfsSV.push_back(tv1);
+                ++ ebfsSV;
+            }
+        }
+        ++ bbfsSV;
+    }
+
+    return make_pair(-1,-1);
+}
+
+inline void theLastBattle() {
+
+}
+
 inline void solve() {
 //    testGoto();
 //    attack();
 
+    if (isDied(*myTank)) {
+        return;
+    }
     if (!isNowSafe()) {
-        m_endpoint.send(ghdl, "{\"commandType\": \"fire\"}", websocketpp::frame::opcode::text);
+        tuple<double,double> nearestSafeCoordinate = runForLife();
+
+        // TODO_CIJIAN  2018 ,Apr16 , Mon, 08:19
+        // 还需要判断是否找到了以及是否距离太远了
+        cout << get<0>(nearestSafeCoordinate) << get<1>(nearestSafeCoordinate) << endl;
+        goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
+
+    } else {
+        m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": -1}", websocketpp::frame::opcode::text);
     }
 }
 
@@ -280,21 +361,56 @@ inline void constructBDMap() {
         for (int i = 0 ;i < vsize; i ++) {
             x = get<0>(bDArea[i]);
             y = get<1>(bDArea[i]);
-            r = sqrt(x*x + y*y);
-            alpha = atan2(y,x);
-            alpha += (*it)->direction;
-            nx = round(r * cos(alpha) + (*it)->x);
-            ny = round(r * sin(alpha) + (*it)->y);
+            // 真实坐标需要换算一下
+            tuple<int, int> mapCoordinate = toMapCoordinate((*it)->x,(*it)->y);
+
+            // 旋转坐标公式
+            nx = round(x * cos((*it)->direction) - y * sin((*it)->direction) + get<0>(mapCoordinate));
+            ny = round(x * sin((*it)->direction) + y * cos((*it)->direction)  + get<1>(mapCoordinate));
+
             if (isInMapRange(nx,ny)) {
                 tankMap->bDMap[nx][ny] = BUDTYPE;
             }
+
 #ifdef SIMULATE
             myfile  << nx << "," << ny << endl;
 #endif
         }
     }
+
+    int nx;
+    int ny;
+    // 旋转后中间会有很多小空心，填一下
+    for(int i = 0; i < tankMap->mapWidth; ++i) {
+        for(int j = 0; j < tankMap->mapHeight; ++j) {
+            if (tankMap->bDMap[i][j] == BUDTYPE) {
+                continue;
+            }
+            int count = 0;
+
+            for (int lr = 0 ; lr < 4 ; lr ++) {
+                nx = i + mv4Step[lr][0];
+                ny = j + mv4Step[lr][1];
+                if (!isInMapRange(nx,ny) || tankMap->bDMap[nx][ny]) {
+                    count ++;
+                }
+            }
+
+            if (count == 4) {
+                tankMap->bDMap[i][j] = BUDTYPE;
 #ifdef SIMULATE
+            myfile  << i << "," << j << endl;
+#endif
+
+            }
+        }
+    }
+#ifdef SIMULATE
+
     myfile.close();
+//    if (tankMap->bullets.size() >= 2 && turn >= 100 ) {
+//        assert(0);
+//    }
 #endif
 }
 
@@ -436,8 +552,10 @@ void initMap(json msg) {
     }
 
     constructMapInfo(msg);
-    tankMap->mapHeight = tankMap->height * mapMultiple;
-    tankMap->mapWidth = tankMap->width * mapMultiple;
+
+    // 考虑边界问题，为了不溢出
+    tankMap->mapHeight = (tankMap->height) * mapMultiple + 1;
+    tankMap->mapWidth = (tankMap->width) * mapMultiple + 1;
     tankMap->oMap = new int*[tankMap->mapWidth];
     tankMap->dMap = new int*[tankMap->mapWidth];
     tankMap->bDMap = new int*[tankMap->mapWidth];
@@ -515,11 +633,11 @@ inline void getMessage(string msg , client &cl, websocketpp::connection_hdl hdl)
         for (json::iterator it = j3.begin(); it != j3.end(); ++it) {
             if (it.key() == "data") {
                 string temp = it.value();
-                initMap(json::parse(temp));
+                constructMapInfo(json::parse(temp));
+
             }
         }
     }
-
     solve();
 
     turn ++;
@@ -644,7 +762,7 @@ void beginPrepare() {
     for (int i = -mapMultiple - 1; i <= mapMultiple + 1 ; ++i) {
         int rDistance = mapMultiple * bDDistance;
         for (int j = 0 ;j <= rDistance; j++) {
-            bDArea.push_back(make_pair(i,j));
+            bDArea.push_back(make_pair(j, i));
         }
     }
 
