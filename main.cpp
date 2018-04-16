@@ -33,6 +33,14 @@ using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
 using websocketpp::lib::bind;
 
+clock_t bClock, eClock;
+
+inline void caculateClock() {
+    eClock = clock();
+    cout <<"Get Message intervel : " <<(double)(eClock - bClock) / CLOCKS_PER_SEC << endl;
+}
+
+
 class perftest;
 
 client m_endpoint;
@@ -44,9 +52,9 @@ typedef client::connection_ptr connection_ptr;
 
 int turn = 0;
 int mapMultiple = 20;
-float tDDistance = 2; // 坦克的伤害半径
+float tDDistance = 6; // 坦克的伤害半径
 float bDDistance = 5; // 子弹的伤害远度
-float maxRebornCd = 20; // 子弹的伤害远度
+float maxRebornCd = 20; // 最大复活时间
 
 int TDTYPE = -2;
 int BLDTYPE = -1;
@@ -125,7 +133,7 @@ inline void messageSend(string msg) {
         return ;
     }
 
-    tCommands.push_back(msg);
+    tCommands.push_back(to_string(myTank->x) +  + " , " + to_string(myTank->y) +  msg);
 #endif
 
     m_endpoint.send(ghdl, msg, websocketpp::frame::opcode::text);
@@ -238,8 +246,6 @@ inline double xyAttackAngle(AttackObject *ao) {
     double x1 = ao->target->x;
     double  y1 = ao->target->y;
     double direction = ao->target->direction;
-
-
 
     double angle = angleIn2PI(atan2(y - y1, x - x1)) - direction; // 相差角度
     angle = angleIn2PI(angle);
@@ -452,23 +458,22 @@ inline void solve() {
 
 #ifdef SIMULATE
 
-        if (!isSimulateDie) {
-
-            tCoordinates.push_back((to_string(myTank->x) + " " + to_string(myTank->y)));
-            ofstream myfile;
-            myfile.open("commands.txt");
-            if (turn >= 100 && myTank->rebornCd > maxRebornCd - 0.1) {
-                getMessage(tMessages[tMessages.size() -5]);
-
-                for (int  i = tCommands.size() - 5; i <  tCommands.size() ;i ++ ) {
-                    myfile << tCoordinates[i] << "   " << tCommands[i] << endl;
-                }
-
-                myfile.close();
-                isSimulateDie = true;
-                assert(0);
-            }
-        }
+//        if (!isSimulateDie) {
+//
+//            ofstream myfile;
+//            myfile.open("commands.txt");
+//            if (turn >= 100 && myTank->rebornCd > maxRebornCd - 0.1) {
+//                getMessage(tMessages[tMessages.size() - 2]);
+//
+//                for (int  i = 0; i <  tCommands.size() ;i ++ ) {
+//                    //myfile << tCommands[i] << endl;
+//                }
+//
+//                myfile.close();
+//                isSimulateDie = true;
+//                assert(0);
+//            }
+//        }
 #endif
         return;
     }
@@ -481,7 +486,7 @@ inline void solve() {
         // TODO_CIJIAN  2018 ,Apr16 , Mon, 08:19
         // 还需要判断是否找到了以及是否距离太远了
 #ifdef SIMULATE
-        cout <<"scape to :" << get<0>(nearestSafeCoordinate) << " "<< get<1>(nearestSafeCoordinate) << endl;
+        cout <<myTank->x << ", " << myTank->y <<" scape to :" << get<0>(nearestSafeCoordinate) << " "<< get<1>(nearestSafeCoordinate) << endl;
 //    if (turn >= 100 && tankMap->bullets.size() > 4) {
 //        assert(0);
 //    }
@@ -507,6 +512,11 @@ inline void constructBDMap() {
     mapClear(tankMap->bDMap);
 
     for (auto it = tankMap->bullets.begin(); it != tankMap->bullets.end(); ++it) {
+
+        if (getDistance(myTank->x, myTank->y, (*it)->x, (*it)->y) > bDDistance * 2) {
+            continue;
+        }
+
         int nx = 0;
         int ny = 0;
         int x = 0;
@@ -515,11 +525,13 @@ inline void constructBDMap() {
         double distnace;
         double r;
         int vsize = bDArea.size();
-        for (int i = 0 ;i < vsize; i ++) {
+        for (int i = 0 ;i < vsize; ++ i) {
             x = get<0>(bDArea[i]);
             y = get<1>(bDArea[i]);
             // 真实坐标需要换算一下
             tuple<int, int> mapCoordinate = toMapCoordinate((*it)->x,(*it)->y);
+
+
 
             // 旋转坐标公式
             nx = round(x * cos((*it)->direction) - y * sin((*it)->direction) + get<0>(mapCoordinate));
@@ -530,7 +542,7 @@ inline void constructBDMap() {
             }
 
 #ifdef SIMULATE
-            myfile  << nx << "," << ny << endl;
+            //myfile << nx << "," << ny << endl;
 #endif
         }
     }
@@ -538,6 +550,7 @@ inline void constructBDMap() {
     int nx;
     int ny;
     // 旋转后中间会有很多小空心，填一下
+
     for(int i = 0; i < tankMap->mapWidth; ++i) {
         for(int j = 0; j < tankMap->mapHeight; ++j) {
             if (tankMap->bDMap[i][j] == BUDTYPE) {
@@ -546,18 +559,20 @@ inline void constructBDMap() {
 
             int count = 0;
 
-            for (int lr = 0 ; lr < 4 ; lr ++) {
+            for (int lr = 0 ; lr < 4 ; ++lr) {
                 nx = i + mv4Step[lr][0];
                 ny = j + mv4Step[lr][1];
                 if (!isInMapRange(nx,ny) || tankMap->bDMap[nx][ny]) {
                     count ++;
+                } else {
+                    break;
                 }
             }
 
             if (count == 4) {
                 tankMap->bDMap[i][j] = BUDTYPE;
 #ifdef SIMULATE
-            myfile  << i << "," << j << endl;
+            //myfile << i << "," << j << endl;
 #endif
 
             }
@@ -578,16 +593,20 @@ inline void constructDMap() {
     // 构建子弹伤害矩阵
     constructBDMap();
 
-#ifdef TEST
-    ofstream myfile;
-    myfile.open("tanks.txt",ios::trunc);
-#endif
+//#ifdef TEST
+//    ofstream myfile;
+//    myfile.open("tanks.txt",ios::trunc);
+//#endif
     mapClear(tankMap->tDMap);
     for(auto it = tankMap->tanks.begin(); it != tankMap->tanks.end(); ++it) {
         tuple<int, int> mapCoordinate = toMapCoordinate((*it)->x,(*it)->y);
 
         // 复活时间大的
         if ((*it)->rebornCd > 0.00001) {
+            continue;
+        }
+
+        if (getDistance(myTank->x, myTank->y, (*it)->x, (*it)->y) > tDDistance * 2) {
             continue;
         }
 
@@ -598,15 +617,15 @@ inline void constructDMap() {
             if (isInMapRange(tx,ty)) {
                 tankMap->tDMap[tx][ty] = TDTYPE;
             }
-#ifdef TEST
-            myfile << tx << "," << ty << endl;
-#endif
+//#ifdef TEST
+//            //myfile << tx << "," << ty << endl;
+//#endif
         }
     }
-
-#ifdef TEST
-    myfile.close();
-#endif
+//
+//#ifdef TEST
+//    myfile.close();
+//#endif
 
 }
 
@@ -739,7 +758,7 @@ void initMap(json msg) {
                 tankMap->dMap[tx][ty] = BLDTYPE;
             }
 #ifdef TEST
-            myfile << tx << "," << ty << endl;
+            //myfile << tx << "," << ty << endl;
 #endif
         }
 
@@ -751,13 +770,17 @@ void initMap(json msg) {
 }
 
 inline void getMessage(string msg) {
+#ifdef SIMULATE
+    caculateClock();
+    bClock = clock();
+#endif
+
+#ifdef SIMULATE
     tMessages.push_back(msg);
+#endif
 
     auto j3 = json::parse(msg);
 
-//    for (auto& element : j3) {
-//        std::cout << element << '\n';
-//    }
     if (turn == 0) {
         for (json::iterator it = j3.begin(); it != j3.end(); ++it) {
             if (it.key() == "data") {

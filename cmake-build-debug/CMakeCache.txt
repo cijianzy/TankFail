@@ -231,9 +231,6 @@ PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/local/bin/pkg-config
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
 
-//The directory containing a CMake configuration file for json.
-json_DIR:PATH=json_DIR-NOTFOUND
-
 //Value Computed by CMake
 tank_BINARY_DIR:STATIC=/Users/cijian/CLionProjects/tank/cmake-build-debug
 

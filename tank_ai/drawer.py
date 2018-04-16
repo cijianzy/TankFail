@@ -51,4 +51,7 @@ for line in file:
     print(x, y)
     if x >= 0 and x <= 25*20 and y >= 0 and y <= 15* 20:
         draw.point((x, y), 'red')
+
+
+draw.point((round(23*20) ,round(2.6* 20)), 'blue')
 im.save("test.PNG", "PNG")
