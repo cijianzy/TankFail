@@ -1,0 +1,1 @@
+`bash new_game.sh开始连接

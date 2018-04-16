@@ -110,6 +110,13 @@ public:
 
 Map *tankMap;
 
+inline void mapClear(int **neadClearMap) {
+
+    for(int i = 0; i < tankMap->mapWidth; ++i) {
+        memset(neadClearMap[i], 0, sizeof(int) * tankMap->mapHeight);
+    }
+}
+
 inline float getDistance(float x1, float y1, float x2, float y2) {
     return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 }
@@ -267,10 +274,25 @@ inline void clearBfsSV() {
     bfsSV.clear();
 }
 
+int **vMap = NULL;
+
 inline tuple<double, double> runForLife() {
+
+
     int bbfsSV  =  0;
     int ebfsSV = 0;
+
     clearBfsSV();
+    mapClear(vMap);
+
+    // TODO_CIJIAN  2018 ,Apr16 , Mon, 09:27
+    for(int i = 0 ;i < tankMap->mapWidth ;i ++) {
+        for(int j = 0 ;j < tankMap->mapHeight;j ++) {
+            if (vMap[i][j] != 0) {
+                assert(0);
+            }
+        }
+    }
     vector<int> tv;
 
     int nx,ny;
@@ -279,28 +301,33 @@ inline tuple<double, double> runForLife() {
     ny = get<1>(co);
     tv.push_back(nx);
     tv.push_back(ny);
-
+    vMap[nx][ny] = 1;
     bfsSV.push_back(tv);
 
+
     while(bbfsSV <= ebfsSV) {
-        int x = bfsSV[bbfsSV][1];
+        int x = bfsSV[bbfsSV][0];
         int y = bfsSV[bbfsSV][1];
 
         for (int i = 0 ;i < 4 ; ++ i) {
             int nx = x + mv4Step[i][0];
-            int ny = x + mv4Step[i][1];
+            int ny = y + mv4Step[i][1];
 
-            if (isInMapRange(nx,ny)) {
+            if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
                 // 如果发现安全区域
+                //
                 if (tankMap->bDMap[nx][ny] == 0 && tankMap->dMap[nx][ny] == 0) {
                     // 反的安全区域
                     tuple<float, float> tureCoordinate = mapCoordinateToTrue(nx,ny);
+
                     return make_pair(get<0>(tureCoordinate), get<1>(tureCoordinate));
                 }
 
                 vector<int> tv1;
+
                 tv1.push_back(nx);
                 tv1.push_back(ny);
+                vMap[nx][ny] = 1;
                 bfsSV.push_back(tv1);
                 ++ ebfsSV;
             }
@@ -315,6 +342,7 @@ inline void theLastBattle() {
 
 }
 
+
 inline void solve() {
 //    testGoto();
 //    attack();
@@ -322,13 +350,22 @@ inline void solve() {
     if (isDied(*myTank)) {
         return;
     }
+
+    attack();
+
     if (!isNowSafe()) {
         tuple<double,double> nearestSafeCoordinate = runForLife();
 
         // TODO_CIJIAN  2018 ,Apr16 , Mon, 08:19
         // 还需要判断是否找到了以及是否距离太远了
-        cout << get<0>(nearestSafeCoordinate) << get<1>(nearestSafeCoordinate) << endl;
+#ifdef SIMULATE
+        cout <<"scape to :" << get<0>(nearestSafeCoordinate) << " "<< get<1>(nearestSafeCoordinate) << endl;
+//    if (turn >= 100) {
+//        assert(0);
+//    }
+#endif
         goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
+
 
     } else {
         m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": -1}", websocketpp::frame::opcode::text);
@@ -345,9 +382,7 @@ inline void constructBDMap() {
     myfile.open("bulltes.txt");
 #endif
 
-    for(int i = 0; i < tankMap->mapWidth; ++i) {
-        memset(tankMap->bDMap[i], 0, sizeof(int) * tankMap->mapHeight);
-    }
+    mapClear(tankMap->bDMap);
 
     for (auto it = tankMap->bullets.begin(); it != tankMap->bullets.end(); ++it) {
         int nx = 0;
@@ -559,12 +594,13 @@ void initMap(json msg) {
     tankMap->oMap = new int*[tankMap->mapWidth];
     tankMap->dMap = new int*[tankMap->mapWidth];
     tankMap->bDMap = new int*[tankMap->mapWidth];
-
+    vMap = new int*[tankMap->mapWidth];
     // todo 完成XY对应
     for(int i = 0; i < tankMap->mapWidth; ++i) {
         tankMap->oMap[i] = new int[tankMap->mapHeight];
         tankMap->dMap[i] = new int[tankMap->mapHeight];
         tankMap->bDMap[i] = new int[tankMap->mapHeight];
+        vMap[i]= new int[tankMap->mapHeight];
     }
 
 #ifdef TEST
