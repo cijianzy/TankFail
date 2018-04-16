@@ -186,7 +186,7 @@ inline double angleIn2PI(double angle) {
     return angle;
 }
 
-inline bool isXYSafe(double x, double y) {
+inline bool isXYSafeForBullet(double x, double y) {
 
     tuple<int, int> tt= toMapCoordinate(x,y);
 
@@ -195,15 +195,36 @@ inline bool isXYSafe(double x, double y) {
     // TODO_CIJIAN  2018 ,Apr16 , Mon, 07:53
     // 需要转换
 
-    if (isInMapRange(nx,ny) && (tankMap->bDMap[nx][ny] != 0 || tankMap->tDMap[nx][ny] != 0)) {
+    if (isInMapRange(nx,ny) && tankMap->bDMap[nx][ny] != 0) {
         return false;
     } else {
         return true;
     }
 }
 
-inline bool isNowSafe() {
-    return isXYSafe(myTank->x, myTank->y);
+
+inline bool isXYSafeForTank(double x, double y) {
+
+    tuple<int, int> tt= toMapCoordinate(x,y);
+
+    int nx = round(get<0>(tt));
+    int ny = round(get<1>(tt));
+    // TODO_CIJIAN  2018 ,Apr16 , Mon, 07:53
+    // 需要转换
+
+    if (isInMapRange(nx,ny) && tankMap->tDMap[nx][ny] != 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+inline bool isNowSafeForBullet() {
+    return isXYSafeForBullet(myTank->x, myTank->y);
+}
+
+inline bool isNowSafeForTank() {
+    return isXYSafeForTank(myTank->x, myTank->y);
 }
 
 inline bool isDied(Tank t) {
@@ -396,7 +417,7 @@ inline tuple<double, double> runForWin() {
     return make_pair(-1,-1);
 }
 
-inline tuple<double, double> runForLife() {
+inline tuple<double, double> runForLife(int **map) {
     int bbfsSV  =  0;
     int ebfsSV = 0;
 
@@ -426,10 +447,9 @@ inline tuple<double, double> runForLife() {
             if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
                 // 如果发现安全区域
                 //
-                if (tankMap->bDMap[nx][ny] == 0 && tankMap->dMap[nx][ny] == 0 && tankMap->tDMap[nx][ny] == 0) {
+                if (tankMap->dMap[nx][ny] == 0 && map[nx][ny] == 0) {
                     // 反的安全区域
                     tuple<float, float> tureCoordinate = mapCoordinateToTrue(nx,ny);
-
                     return make_pair(get<0>(tureCoordinate), get<1>(tureCoordinate));
                 }
 
@@ -480,20 +500,13 @@ inline void solve() {
 
 //    attack();
 
-    if (!isNowSafe()) {
-        tuple<double,double> nearestSafeCoordinate = runForLife();
-
-        // TODO_CIJIAN  2018 ,Apr16 , Mon, 08:19
-        // 还需要判断是否找到了以及是否距离太远了
-#ifdef SIMULATE
-        cout <<myTank->x << ", " << myTank->y <<" scape to :" << get<0>(nearestSafeCoordinate) << " "<< get<1>(nearestSafeCoordinate) << endl;
-//    if (turn >= 100 && tankMap->bullets.size() > 4) {
-//        assert(0);
-//    }
-#endif
+    // bullet 和 tank 分开讨论, 优先子弹
+    if (!isNowSafeForBullet()) {
+        tuple<double, double> nearestSafeCoordinate = runForLife(tankMap->bDMap);
         goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
-
-
+    } else if (!isNowSafeForTank()) {
+        tuple<double, double> nearestSafeCoordinate = runForLife(tankMap->tDMap);
+        goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
     } else {
        stay();
     }
@@ -513,6 +526,7 @@ inline void constructBDMap() {
 
     for (auto it = tankMap->bullets.begin(); it != tankMap->bullets.end(); ++it) {
 
+        // 如果距离大于考虑距离的两倍，目前不用画到图上来
         if (getDistance(myTank->x, myTank->y, (*it)->x, (*it)->y) > bDDistance * 2) {
             continue;
         }
@@ -530,8 +544,6 @@ inline void constructBDMap() {
             y = get<1>(bDArea[i]);
             // 真实坐标需要换算一下
             tuple<int, int> mapCoordinate = toMapCoordinate((*it)->x,(*it)->y);
-
-
 
             // 旋转坐标公式
             nx = round(x * cos((*it)->direction) - y * sin((*it)->direction) + get<0>(mapCoordinate));
