@@ -1,0 +1,5 @@
+-2000.000000 -2000.000000   {"commandType": "direction", "angle": -1}
+-2000.000000 -2000.000000   {"commandType": "direction", "angle": -1}
+-2000.000000 -2000.000000   {"commandType": "direction", "angle": -1}
+-2000.000000 -2000.000000   {"commandType": "direction", "angle": 357.821344}
+-2000.000000 -2000.000000   {"commandType": "direction", "angle": -1}

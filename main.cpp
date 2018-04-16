@@ -17,17 +17,21 @@
 //#define TEST
 #define SIMULATE
 
-using json = nlohmann::json;
-
-
 using namespace std;
+
+#ifdef SIMULATE
+    vector<string> tMessages;
+    vector<string> tCommands;
+    vector<string> tCoordinates;
+#endif
+
+using json = nlohmann::json;
 
 typedef websocketpp::client<websocketpp::config::asio_tls_client> client;
 
 using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
 using websocketpp::lib::bind;
-
 
 class perftest;
 
@@ -40,12 +44,15 @@ typedef client::connection_ptr connection_ptr;
 
 int turn = 0;
 int mapMultiple = 20;
-float tDDistance = 3; // 坦克的伤害半径
-float bDDistance = 8; // 子弹的伤害远度
+float tDDistance = 2; // 坦克的伤害半径
+float bDDistance = 5; // 子弹的伤害远度
+float maxRebornCd = 20; // 子弹的伤害远度
 
 int TDTYPE = -2;
 int BLDTYPE = -1;
 int BUDTYPE = -3;
+
+bool isSimulateDie = false; // 是否是模拟死亡场
 
 vector<tuple<int,int>> radius1Circle;
 vector<tuple<int,int>> radius2Circle;
@@ -106,9 +113,35 @@ public:
     int **oMap = NULL;
     int **dMap = NULL;
     int **bDMap= NULL;
+    int **tDMap= NULL;
 };
 
 Map *tankMap;
+
+inline void messageSend(string msg) {
+
+#ifdef SIMULATE
+    if (isSimulateDie) {
+        return ;
+    }
+
+    tCommands.push_back(msg);
+#endif
+
+    m_endpoint.send(ghdl, msg, websocketpp::frame::opcode::text);
+}
+
+inline void fire() {
+    messageSend("{\"commandType\": \"fire\"}");
+}
+
+inline void direction(float angle) {
+    messageSend("{\"commandType\": \"direction\", \"angle\": " + to_string(angle/(2 * M_PI) * 360) + "}");
+}
+
+inline void stay() {
+    messageSend("{\"commandType\": \"direction\", \"angle\": -1}");
+}
 
 inline void mapClear(int **neadClearMap) {
 
@@ -154,7 +187,7 @@ inline bool isXYSafe(double x, double y) {
     // TODO_CIJIAN  2018 ,Apr16 , Mon, 07:53
     // 需要转换
 
-    if (isInMapRange(nx,ny) && tankMap->bDMap[nx][ny] != 0) {
+    if (isInMapRange(nx,ny) && (tankMap->bDMap[nx][ny] != 0 || tankMap->tDMap[nx][ny] != 0)) {
         return false;
     } else {
         return true;
@@ -170,25 +203,44 @@ inline bool isDied(Tank t) {
 }
 
 inline void goTo(double x, double y) {
-    double angle = atan2(y - myTank->y, x - myTank->x);
-    m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": " + to_string(angle/(2 * M_PI) * 360) + "}" , websocketpp::frame::opcode::text);
+    double angle = angleIn2PI(atan2(y - myTank->y, x - myTank->x));
+    direction(angle);
 }
 
 inline void testGoto() {
     double angle = 0;
     for (int i = 0 ; i < 20 ; i ++) {
-        m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": " + to_string(angle/(2 * M_PI) * 360) + "}" , websocketpp::frame::opcode::text);
+        direction(angle);
         angle += M_PI/20;
         // usleep 微秒  1e6
         usleep(16000);
     }
 }
 
-inline double xyAttackAngle(double x, double y, double x1, double y1, double direction) {
+class AttackObject {
+public:
+   double x, y;
+   double delay = 0;
+   double collideX;
+   double collideY;
+   Tank *target;
+   bool canAttack;
+   double angle;
+};
+
+void getMessage(string msg);
+
+inline double xyAttackAngle(AttackObject *ao) {
 
     // 追击公式  91 * x * x = y * y - 6*x*y*cos(θ)
+    double x = ao->x;
+    double y = ao->y;
+    double x1 = ao->target->x;
+    double  y1 = ao->target->y;
+    double direction = ao->target->direction;
 
-    cout << atan2(y - y1, x - x1) << endl;
+
+
     double angle = angleIn2PI(atan2(y - y1, x - x1)) - direction; // 相差角度
     angle = angleIn2PI(angle);
     if (angle > M_PI) {
@@ -229,37 +281,43 @@ inline double xyAttackAngle(double x, double y, double x1, double y1, double dir
             angleAns = atan2(y1 - y, x1 - x) + angleAns;
         }
     }
-
     angleAns = angleIn2PI(angleAns);
-    return angleAns;
 
+    ao->angle = angleAns;
+    return angle;
 }
 
-inline void attack(Tank tank) {
-    double angle = xyAttackAngle(myTank->x, myTank->y, tank.x, tank.y, tank.direction);
+inline void attack(Tank *tank) {
+    AttackObject *ao = new AttackObject();
+    ao->x = myTank->x;
+    ao->y = myTank->y;
+    ao->target = tank;
+    double angle = xyAttackAngle(ao);
+
 #ifdef SIMULATE
     ofstream myfile;
     myfile.open("attack.txt");
-    cout << "attack func " << "myPosition: "  << myTank->x << " " << myTank->y << "targetId "<< tank.id << "targetPosition: " << tank.x << " " << tank.y << " targetDirection: " <<
-           tank.direction<< " result: " << angle << endl;
+    cout << "attack func " << "myPosition: "  << myTank->x << " " << myTank->y << "targetId "<< tank->id << "targetPosition: " << tank->x << " " << tank->y << " targetDirection: " <<
+           tank->direction<< " result: " << angle << endl;
     myfile.close();
 #endif
-    m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": " + to_string(angle/(2 * M_PI) * 360) + "}" , websocketpp::frame::opcode::text);
+    direction(ao->angle);
+    fire();
+    stay();
+}
 
-    m_endpoint.send(ghdl, "{\"commandType\": \"fire\"}", websocketpp::frame::opcode::text);
-
-    m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": -1}", websocketpp::frame::opcode::text);
+inline void tryAttack() {
 
 }
+
 inline void attack() {
     for (auto it = tankMap->tanks.begin(); it != tankMap->tanks.end(); ++it ) {
         if ((*it)->rebornCd < 0.00001) {
-            attack(**it);
+            attack(*it);
             break;
         }
     }
 }
-
 
 vector<vector<int>> bfsSV; // 安全区域的广度优先
 vector<vector<int>> bfsAV; // 可攻击区域的广度优先
@@ -274,25 +332,71 @@ inline void clearBfsSV() {
     bfsSV.clear();
 }
 
+inline void clearBfsAV() {
+    for (auto it = bfsAV.begin(); it != bfsAV.end() ; ++ it) {
+        (*it).clear();
+    }
+    bfsAV.clear();
+}
+
 int **vMap = NULL;
 
+
+inline tuple<double, double> runForWin() {
+    int bBfsAV  =  0;
+    int eBfsAV = 0;
+
+    clearBfsAV();
+
+    mapClear(vMap);
+
+    vector<int> tv;
+
+    int nx,ny;
+    tuple<int,int> co = toMapCoordinate(myTank->x, myTank->y);
+    nx = get<0>(co);
+    ny = get<1>(co);
+    tv.push_back(nx);
+    tv.push_back(ny);
+    vMap[nx][ny] = 1;
+    bfsSV.push_back(tv);
+
+    while(bBfsAV <= eBfsAV) {
+        int x = bfsSV[bBfsAV][0];
+        int y = bfsSV[bBfsAV][1];
+
+        for (int i = 0 ;i < 4 ; ++ i) {
+            int nx = x + mv4Step[i][0];
+            int ny = y + mv4Step[i][1];
+
+            if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
+                // TODO_CIJIAN  2018 ,Apr16 , Mon, 15:52
+                if (true) {
+
+                }
+
+                vector<int> tv1;
+
+                tv1.push_back(nx);
+                tv1.push_back(ny);
+                vMap[nx][ny] = 1;
+                bfsSV.push_back(tv1);
+                ++ eBfsAV;
+            }
+        }
+        ++ bBfsAV;
+    }
+
+    return make_pair(-1,-1);
+}
+
 inline tuple<double, double> runForLife() {
-
-
     int bbfsSV  =  0;
     int ebfsSV = 0;
 
     clearBfsSV();
     mapClear(vMap);
 
-    // TODO_CIJIAN  2018 ,Apr16 , Mon, 09:27
-    for(int i = 0 ;i < tankMap->mapWidth ;i ++) {
-        for(int j = 0 ;j < tankMap->mapHeight;j ++) {
-            if (vMap[i][j] != 0) {
-                assert(0);
-            }
-        }
-    }
     vector<int> tv;
 
     int nx,ny;
@@ -316,7 +420,7 @@ inline tuple<double, double> runForLife() {
             if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
                 // 如果发现安全区域
                 //
-                if (tankMap->bDMap[nx][ny] == 0 && tankMap->dMap[nx][ny] == 0) {
+                if (tankMap->bDMap[nx][ny] == 0 && tankMap->dMap[nx][ny] == 0 && tankMap->tDMap[nx][ny] == 0) {
                     // 反的安全区域
                     tuple<float, float> tureCoordinate = mapCoordinateToTrue(nx,ny);
 
@@ -342,14 +446,34 @@ inline void theLastBattle() {
 
 }
 
-
 inline void solve() {
 
     if (isDied(*myTank)) {
+
+#ifdef SIMULATE
+
+        if (!isSimulateDie) {
+
+            tCoordinates.push_back((to_string(myTank->x) + " " + to_string(myTank->y)));
+            ofstream myfile;
+            myfile.open("commands.txt");
+            if (turn >= 100 && myTank->rebornCd > maxRebornCd - 0.1) {
+                getMessage(tMessages[tMessages.size() -5]);
+
+                for (int  i = tCommands.size() - 5; i <  tCommands.size() ;i ++ ) {
+                    myfile << tCoordinates[i] << "   " << tCommands[i] << endl;
+                }
+
+                myfile.close();
+                isSimulateDie = true;
+                assert(0);
+            }
+        }
+#endif
         return;
     }
 
-    attack();
+//    attack();
 
     if (!isNowSafe()) {
         tuple<double,double> nearestSafeCoordinate = runForLife();
@@ -358,7 +482,7 @@ inline void solve() {
         // 还需要判断是否找到了以及是否距离太远了
 #ifdef SIMULATE
         cout <<"scape to :" << get<0>(nearestSafeCoordinate) << " "<< get<1>(nearestSafeCoordinate) << endl;
-//    if (turn >= 100) {
+//    if (turn >= 100 && tankMap->bullets.size() > 4) {
 //        assert(0);
 //    }
 #endif
@@ -366,7 +490,7 @@ inline void solve() {
 
 
     } else {
-         m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": -1}", websocketpp::frame::opcode::text);
+       stay();
     }
 }
 
@@ -419,6 +543,7 @@ inline void constructBDMap() {
             if (tankMap->bDMap[i][j] == BUDTYPE) {
                 continue;
             }
+
             int count = 0;
 
             for (int lr = 0 ; lr < 4 ; lr ++) {
@@ -452,12 +577,12 @@ inline void constructDMap() {
 //构建危险矩阵矩阵
     // 构建子弹伤害矩阵
     constructBDMap();
-    // TODO_CIJIAN  2018 ,Apr15 , Sun, 20:02
 
 #ifdef TEST
     ofstream myfile;
     myfile.open("tanks.txt",ios::trunc);
 #endif
+    mapClear(tankMap->tDMap);
     for(auto it = tankMap->tanks.begin(); it != tankMap->tanks.end(); ++it) {
         tuple<int, int> mapCoordinate = toMapCoordinate((*it)->x,(*it)->y);
 
@@ -471,10 +596,7 @@ inline void constructDMap() {
             int ty = get<1>(*iter) + get<1>(mapCoordinate);
 
             if (isInMapRange(tx,ty)) {
-
-                // TODO_CIJIAN  2018 ,Apr16 , Mon, 11:54
-                // 需要加上
-//                tankMap->dMap[tx][ty] = TDTYPE;
+                tankMap->tDMap[tx][ty] = TDTYPE;
             }
 #ifdef TEST
             myfile << tx << "," << ty << endl;
@@ -592,11 +714,14 @@ void initMap(json msg) {
     tankMap->oMap = new int*[tankMap->mapWidth];
     tankMap->dMap = new int*[tankMap->mapWidth];
     tankMap->bDMap = new int*[tankMap->mapWidth];
+    tankMap->tDMap = new int*[tankMap->mapWidth];
     vMap = new int*[tankMap->mapWidth];
     for(int i = 0; i < tankMap->mapWidth; ++i) {
         tankMap->oMap[i] = new int[tankMap->mapHeight];
         tankMap->dMap[i] = new int[tankMap->mapHeight];
         tankMap->bDMap[i] = new int[tankMap->mapHeight];
+        tankMap->tDMap[i] = new int[tankMap->mapHeight];
+
         vMap[i]= new int[tankMap->mapHeight];
     }
 
@@ -625,28 +750,8 @@ void initMap(json msg) {
 #endif
 }
 
-void getTestMessage(string msg) {
-    auto j3 = json::parse(msg);
-
-//    for (auto& element : j3) {
-//        std::cout << element << '\n';
-//    }
-    if (turn == 0) {
-        for (json::iterator it = j3.begin(); it != j3.end(); ++it) {
-            if (it.key() == "data") {
-                string temp = it.value();
-                initMap(json::parse(temp));
-            }
-        }
-    } else {
-        constructMapInfo(j3);
-    }
-    turn ++;
-
-
-}
-
-inline void getMessage(string msg , client &cl, websocketpp::connection_hdl hdl) {
+inline void getMessage(string msg) {
+    tMessages.push_back(msg);
 
     auto j3 = json::parse(msg);
 
@@ -654,7 +759,6 @@ inline void getMessage(string msg , client &cl, websocketpp::connection_hdl hdl)
 //        std::cout << element << '\n';
 //    }
     if (turn == 0) {
-        ghdl = hdl;
         for (json::iterator it = j3.begin(); it != j3.end(); ++it) {
             if (it.key() == "data") {
                 string temp = it.value();
@@ -748,7 +852,8 @@ public:
     }
     void on_message(websocketpp::connection_hdl hdl, message_ptr msg) {
         m_message = std::chrono::high_resolution_clock::now();
-        getMessage(msg->get_payload(), m_endpoint, hdl);
+        ghdl = hdl;
+        getMessage(msg->get_payload());
     }
     void on_close(websocketpp::connection_hdl hdl) {
         m_close = std::chrono::high_resolution_clock::now();
@@ -804,7 +909,6 @@ void test() {
 
     string str = "{\"commandType\":\"REFRESH_DATA\",\"data\":\"{\\\"width\\\":25,\\\"height\\\":15,\\\"tanks\\\":{\\\"ai:58\\\":{\\\"name\\\":\\\"流弊\\\",\\\"speed\\\":0,\\\"direction\\\":0,\\\"fireCd\\\":0,\\\"fire\\\":false,\\\"position\\\":[13.925306008084853,10.266874545908701],\\\"score\\\":0,\\\"rebornCd\\\":null,\\\"shieldCd\\\":1}},\\\"bullets\\\":[],\\\"blocks\\\":[{\\\"position\\\":[3,6],\\\"radius\\\":1},{\\\"position\\\":[0,10],\\\"radius\\\":1},{\\\"position\\\":[21,9],\\\"radius\\\":1},{\\\"position\\\":[11,12],\\\"radius\\\":1},{\\\"position\\\":[17,11],\\\"radius\\\":1},{\\\"position\\\":[11,2],\\\"radius\\\":1},{\\\"position\\\":[16,9],\\\"radius\\\":1},{\\\"position\\\":[14,5],\\\"radius\\\":1},{\\\"position\\\":[15,2],\\\"radius\\\":1},{\\\"position\\\":[15,11],\\\"radius\\\":1}]}\"}";
 
-    getTestMessage(str);
 }
 int main(int argc, char* argv[]) {
     std::string uri = "wss://tank-match.taobao.com/ai";
@@ -818,7 +922,7 @@ int main(int argc, char* argv[]) {
     system("open -a /Applications/iTerm\\ 2.app /bin/bash ../tank_ai/new_game.sh");
 #endif
     beginPrepare();
-//    test();
+
 
     if (argc == 2) {
         uri = argv[1];

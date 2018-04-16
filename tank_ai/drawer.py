@@ -25,7 +25,7 @@ for line in file:
     print(x, y)
     if x >= 0 and x <= 25*20 and y >= 0 and y <= 15* 20:
         draw.point((x, y), 'black')
-#
+
 #
 # file = open('/Users/cijian/CLionProjects/tank/cmake-build-debug/tanks.txt', 'r');
 #

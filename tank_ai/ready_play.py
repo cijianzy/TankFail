@@ -15,6 +15,7 @@ os.system('nohup python /Users/cijian/CLionProjects/tank/tank_ai/robot-1.py 3029
 os.system('nohup python /Users/cijian/CLionProjects/tank/tank_ai/robot-1.py ee43acbbbc7b0422ee31765901fd6d41 111651 &')
 os.system('nohup python /Users/cijian/CLionProjects/tank/tank_ai/robot-1.py 38ff1f35f228ad512963e79feefaf847 68444 &')
 os.system('nohup python /Users/cijian/CLionProjects/tank/tank_ai/robot-1.py 0f8353dbfcceb45c256ad4168b11e75c 159812 &')
+os.system('nohup python /Users/cijian/CLionProjects/tank/tank_ai/robot-1.py 901c7fb01aae7530c113f4ad0d5857e3 117269 &')
 
 
 # os.system('/Users/cijian/CLionProjects/tank/cmake-build-debug/tank')
