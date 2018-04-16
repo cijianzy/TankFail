@@ -41,7 +41,7 @@ typedef client::connection_ptr connection_ptr;
 int turn = 0;
 int mapMultiple = 20;
 float tDDistance = 3; // 坦克的伤害半径
-float bDDistance = 6; // 子弹的伤害远度
+float bDDistance = 8; // 子弹的伤害远度
 
 int TDTYPE = -2;
 int BLDTYPE = -1;
@@ -344,8 +344,6 @@ inline void theLastBattle() {
 
 
 inline void solve() {
-//    testGoto();
-//    attack();
 
     if (isDied(*myTank)) {
         return;
@@ -368,7 +366,7 @@ inline void solve() {
 
 
     } else {
-        m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": -1}", websocketpp::frame::opcode::text);
+         m_endpoint.send(ghdl, "{\"commandType\": \"direction\", \"angle\": -1}", websocketpp::frame::opcode::text);
     }
 }
 
@@ -452,11 +450,9 @@ inline void constructBDMap() {
 
 inline void constructDMap() {
 //构建危险矩阵矩阵
-
     // 构建子弹伤害矩阵
     constructBDMap();
     // TODO_CIJIAN  2018 ,Apr15 , Sun, 20:02
-
 
 #ifdef TEST
     ofstream myfile;
@@ -475,7 +471,10 @@ inline void constructDMap() {
             int ty = get<1>(*iter) + get<1>(mapCoordinate);
 
             if (isInMapRange(tx,ty)) {
-                tankMap->dMap[tx][ty] = TDTYPE;
+
+                // TODO_CIJIAN  2018 ,Apr16 , Mon, 11:54
+                // 需要加上
+//                tankMap->dMap[tx][ty] = TDTYPE;
             }
 #ifdef TEST
             myfile << tx << "," << ty << endl;
@@ -498,7 +497,6 @@ inline void constructMapInfo(json msg) {
 
         if (it.key() == "bullets") {
             for (json::iterator  j= it.value().begin(); j != it.value().end(); ++ j) {
-
                 Bullet *newBullet = new Bullet();
                 for (json::iterator i = j.value().begin(); i != j.value().end(); ++i) {
                     if (i.key() == "speed") {
@@ -595,7 +593,6 @@ void initMap(json msg) {
     tankMap->dMap = new int*[tankMap->mapWidth];
     tankMap->bDMap = new int*[tankMap->mapWidth];
     vMap = new int*[tankMap->mapWidth];
-    // todo 完成XY对应
     for(int i = 0; i < tankMap->mapWidth; ++i) {
         tankMap->oMap[i] = new int[tankMap->mapHeight];
         tankMap->dMap[i] = new int[tankMap->mapHeight];
@@ -624,7 +621,6 @@ void initMap(json msg) {
     }
 #ifdef TEST
     myfile.close();
-    //todo
     system("python3 ../tank_ai/drawer.py");
 #endif
 }
@@ -822,8 +818,6 @@ int main(int argc, char* argv[]) {
     system("open -a /Applications/iTerm\\ 2.app /bin/bash ../tank_ai/new_game.sh");
 #endif
     beginPrepare();
-
-
 //    test();
 
     if (argc == 2) {
