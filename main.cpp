@@ -17,6 +17,7 @@
 //#define TEST
 #define SIMULATE
 
+
 using namespace std;
 
 #ifdef SIMULATE
@@ -494,7 +495,7 @@ inline tuple<double, double> runForWin() {
                 }
 
                 if (bBfsAV > 20) {
-                    return make_pair(tankMap->width/2, tankMap->height/2);
+                    return make_pair(16, 10.3);
                 }
 
                 vector<int> tv1;
@@ -508,7 +509,7 @@ inline tuple<double, double> runForWin() {
         ++ bBfsAV;
     }
 
-    return make_pair(16 * 20, 10 * 20);
+    return make_pair(16, 10.3);
 }
 
 inline tuple<double, double> runForLife(int **map) {
@@ -609,6 +610,8 @@ inline void solve() {
     } else if (ao == nullptr || ao->canAttack == false){
         tuple<double, double> attackPosition = runForWin();
         goTo(get<0>(attackPosition), get<1>(attackPosition));
+    } else {
+        stay();
     }
 }
 
@@ -992,8 +995,8 @@ public:
 
     void on_open(websocketpp::connection_hdl hdl) {
         m_open = std::chrono::high_resolution_clock::now();
-        m_endpoint.send(hdl, "{\"commandType\": \"aiEnterRoom\", \"roomId\": 67718, \"accessKey\": "
-                             "\"96b69e5beaab0ac5dc5b6c8e9739d102\", \"employeeId\": 159806}", websocketpp::frame::opcode::text);
+        m_endpoint.send(hdl, "{\"commandType\": \"aiEnterRoom\", \"roomId\": 101550, \"accessKey\": "
+                             "\"248c641ededfc6d91bbc31bb2e2056ee\", \"employeeId\": 101550}", websocketpp::frame::opcode::text);
     }
     void on_message(websocketpp::connection_hdl hdl, message_ptr msg) {
         m_message = std::chrono::high_resolution_clock::now();
@@ -1051,13 +1054,11 @@ void beginPrepare() {
 }
 
 void test() {
-
     string str = "{\"commandType\":\"REFRESH_DATA\",\"data\":\"{\\\"width\\\":25,\\\"height\\\":15,\\\"tanks\\\":{\\\"ai:58\\\":{\\\"name\\\":\\\"流弊\\\",\\\"speed\\\":0,\\\"direction\\\":0,\\\"fireCd\\\":0,\\\"fire\\\":false,\\\"position\\\":[13.925306008084853,10.266874545908701],\\\"score\\\":0,\\\"rebornCd\\\":null,\\\"shieldCd\\\":1}},\\\"bullets\\\":[],\\\"blocks\\\":[{\\\"position\\\":[3,6],\\\"radius\\\":1},{\\\"position\\\":[0,10],\\\"radius\\\":1},{\\\"position\\\":[21,9],\\\"radius\\\":1},{\\\"position\\\":[11,12],\\\"radius\\\":1},{\\\"position\\\":[17,11],\\\"radius\\\":1},{\\\"position\\\":[11,2],\\\"radius\\\":1},{\\\"position\\\":[16,9],\\\"radius\\\":1},{\\\"position\\\":[14,5],\\\"radius\\\":1},{\\\"position\\\":[15,2],\\\"radius\\\":1},{\\\"position\\\":[15,11],\\\"radius\\\":1}]}\"}";
 }
 
 int main(int argc, char* argv[]) {
     std::string uri = "wss://tank-match.taobao.com/ai";
-
 
 #ifdef SIMULATE
     system("open -a /Applications/Utilities/Terminal.app /bin/bash ../tank_ai/new_game.sh");
