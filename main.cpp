@@ -178,6 +178,19 @@ inline bool isInMapRange(double x, double y) {
     return true;
 }
 
+inline bool isInTrueMapRange(double x, double y) {
+    if (x < 0 || y < 0) {
+        return false;
+    }
+
+    if (x > tankMap->width || y > tankMap->height) {
+        return false;
+    }
+
+    return true;
+}
+
+
 inline double angleIn2PI(double angle) {
     while (angle > 2 * M_PI) {
         angle -= 2 * M_PI;
@@ -317,7 +330,7 @@ inline void xyAttackAngle(AttackObject *ao) {
 
     // 根据极坐标算出碰撞区域
     ao->collideX = a * cos(angleAns) + ao->x;
-    ao->collideX = a * sin(angleAns) + ao->y;
+    ao->collideY = a * sin(angleAns) + ao->y;
     ao->flyTime = xAns;
 
     ao->angle = angleAns;
@@ -377,11 +390,14 @@ inline bool canAttackTo(AttackObject *ao) {
 
     ao->canAttack = true;
 
-    // TODO_CIJIAN  2018 ,Apr17 , Tue, 09:11
-    //还需要补充超出地图的情况
+    if (isInTrueMapRange(ao->collideX, ao->collideY)) {
+        ao->canAttack = false;
+        return ao->canAttack;
+    }
 
     for (auto it = tankMap->blocks.begin() ;it != tankMap->blocks.end(); ++it) {
         if (hasIntersection(ao->x, ao->y, ao->collideX, ao->collideY, (*it)->x, (*it)->y, (*it)->radius)) {
+            cout << "can not attack" <<ao->x <<", "<< ao->y << ", " << ao->collideX << ", "<< ao->collideY << ", " << (*it)->x << ", " << (*it)->y << ", " << (*it)->radius << endl;
             ao->canAttack = false;
             break;
         }
@@ -393,9 +409,8 @@ inline bool canAttackTo(AttackObject *ao) {
 inline AttackObject* canXYAttack(double x, double y) {
     for (auto it = tankMap->tanks.begin(); it != tankMap->tanks.end(); ++it ) {
         if ((*it)->rebornCd < 0.00001) {
-
             AttackObject *ao = new AttackObject();
-            ao->x =
+            ao->x = myTank->x;
             ao->y = myTank->y;
             ao->target = (*it);
             if (canAttackTo(ao)) {
@@ -1023,7 +1038,7 @@ int main(int argc, char* argv[]) {
 
 
 #ifdef SIMULATE
-    system("open -a /Applications/iTerm\\ 2.app /bin/bash ../tank_ai/new_game.sh");
+    system("open -a /Applications/Utilities/Terminal.app /bin/bash ../tank_ai/new_game.sh");
 #endif
     beginPrepare();
 
