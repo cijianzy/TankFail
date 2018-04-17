@@ -390,7 +390,7 @@ inline bool canAttackTo(AttackObject *ao) {
 
     ao->canAttack = true;
 
-    if (isInTrueMapRange(ao->collideX, ao->collideY)) {
+    if (!isInTrueMapRange(ao->collideX, ao->collideY)) {
         ao->canAttack = false;
         return ao->canAttack;
     }
