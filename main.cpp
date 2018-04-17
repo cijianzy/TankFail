@@ -40,7 +40,6 @@ inline void caculateClock() {
     cout <<"Get Message intervel : " <<(double)(eClock - bClock) / CLOCKS_PER_SEC << endl;
 }
 
-
 class perftest;
 
 client m_endpoint;
@@ -93,8 +92,13 @@ public:
     bool fire;
     float radius = 1;
     int score; // 得分
-
+    float distance;
 };
+
+bool compareTank(Tank *t1, Tank* t2)
+{
+    return (t1->distance < t2->distance);
+}
 
 class Bullet {
 public:
@@ -105,7 +109,7 @@ public:
 Tank *myTank;
 class Block {
 public:
-    float x,y,radius;
+    float x,y,radius = 1;
 };
 
 class Map {
@@ -252,6 +256,7 @@ public:
    double delay = 0;
    double collideX;
    double collideY;
+   double flyTime;
    Tank *target;
    bool canAttack;
    double angle;
@@ -259,7 +264,7 @@ public:
 
 void getMessage(string msg);
 
-inline double xyAttackAngle(AttackObject *ao) {
+inline void xyAttackAngle(AttackObject *ao) {
 
     // 追击公式  91 * x * x = y * y - 6*x*y*cos(θ)
     double x = ao->x;
@@ -310,40 +315,97 @@ inline double xyAttackAngle(AttackObject *ao) {
     }
     angleAns = angleIn2PI(angleAns);
 
+    // 根据极坐标算出碰撞区域
+    ao->collideX = a * cos(angleAns) + ao->x;
+    ao->collideX = a * sin(angleAns) + ao->y;
+    ao->flyTime = xAns;
+
     ao->angle = angleAns;
-    return angle;
 }
 
-inline void attack(Tank *tank) {
-    AttackObject *ao = new AttackObject();
-    ao->x = myTank->x;
-    ao->y = myTank->y;
-    ao->target = tank;
-    double angle = xyAttackAngle(ao);
+inline bool hasIntersection(double x1, double y1, double x2, double y2, double x3, double y3, double r) {
 
-#ifdef SIMULATE
-    ofstream myfile;
-    myfile.open("attack.txt");
-    cout << "attack func " << "myPosition: "  << myTank->x << " " << myTank->y << "targetId "<< tank->id << "targetPosition: " << tank->x << " " << tank->y << " targetDirection: " <<
-           tank->direction<< " result: " << angle << endl;
-    myfile.close();
-#endif
-    direction(ao->angle);
-    fire();
-    stay();
+    double  A = (y2 - y1) / (x2 -x1);
+    double B = -1;
+    double C = y1 - A * x1;
+
+    double lineDistance = abs((A*x3 + B * y3 + C) / sqrt(A*A+B*B));
+
+    double pointOneDistance = getDistance(x1,y1,x3,y3);
+
+    double pointTwoDistance = getDistance(x2,y2,x3,y3);
+
+    if (lineDistance > r) {
+        return false;
+    }
+
+    // 一个点在圆，一定有交点
+    if (pointOneDistance == r || pointTwoDistance == r) {
+        return true;
+    }
+
+    if (min(pointOneDistance, pointTwoDistance) < r &&  max(pointOneDistance, pointTwoDistance) > r) {
+        return true;
+    }
+
+    double pointDistanceSelf = getDistance(x1, y1, x2, y2);
+    double beta = acos((pointOneDistance * pointOneDistance +
+                        pointTwoDistance * pointTwoDistance -
+                        pointDistanceSelf * pointDistanceSelf) / (2 * pointOneDistance * pointTwoDistance));
+
+    if (pointOneDistance > r &&
+        pointTwoDistance > r &&
+        beta > M_PI / 2) {
+        return true;
+    }
+
+    return false;
+
 }
 
-inline void tryAttack() {
+inline bool canAttackTo(AttackObject *ao) {
 
-}
+    // 考虑delay的情况
+//    if (ao->delay > 0.00001) {
+//        double br = ao->delay * 10;
+//        ao->x = ao->x + br * ;
+//        ao->y = ao->y + ao->delay *
+//                double tr = ao->delay * 10;
+//    }
 
-inline void attack() {
-    for (auto it = tankMap->tanks.begin(); it != tankMap->tanks.end(); ++it ) {
-        if ((*it)->rebornCd < 0.00001) {
-            attack(*it);
+    xyAttackAngle(ao);
+
+    ao->canAttack = true;
+
+    // TODO_CIJIAN  2018 ,Apr17 , Tue, 09:11
+    //还需要补充超出地图的情况
+
+    for (auto it = tankMap->blocks.begin() ;it != tankMap->blocks.end(); ++it) {
+        if (hasIntersection(ao->x, ao->y, ao->collideX, ao->collideY, (*it)->x, (*it)->y, (*it)->radius)) {
+            ao->canAttack = false;
             break;
         }
     }
+
+    return ao->canAttack;
+}
+
+inline AttackObject* canXYAttack(double x, double y) {
+    for (auto it = tankMap->tanks.begin(); it != tankMap->tanks.end(); ++it ) {
+        if ((*it)->rebornCd < 0.00001) {
+
+            AttackObject *ao = new AttackObject();
+            ao->x =
+            ao->y = myTank->y;
+            ao->target = (*it);
+            if (canAttackTo(ao)) {
+                return ao;
+            }
+            break;
+        }
+    }
+
+    return nullptr;
 }
 
 vector<vector<int>> bfsSV; // 安全区域的广度优先
@@ -498,7 +560,12 @@ inline void solve() {
         return;
     }
 
-//    attack();
+    AttackObject *ao = canXYAttack(myTank->x, myTank->y);
+    if (ao != nullptr && ao->canAttack == true){
+        direction(ao->angle);
+        fire();
+        stay();
+    }
 
     // bullet 和 tank 分开讨论, 优先子弹
     if (!isNowSafeForBullet()) {
@@ -702,6 +769,16 @@ inline void constructMapInfo(json msg) {
                 }
             }
         }
+
+        for (auto it = tankMap->tanks.begin() ;it != tankMap->tanks.end(); ++it) {
+            (*it)->distance = getDistance(myTank->x, myTank->y, (*it)->x, (*it)->y);
+        }
+
+        // 对坦克按照距离排序
+        sort(tankMap->tanks.begin(), tankMap->tanks.end(), compareTank);
+//        for (auto it = tankMap->tanks.begin() ;it != tankMap->tanks.end(); ++it) {
+//            cout << (*it)->distance << endl;
+//        }
     }
 
     constructDMap();
@@ -851,12 +928,8 @@ public:
         if (ec) {
             m_endpoint.get_alog().write(websocketpp::log::alevel::app,ec.message());
         }
-
-
         //con->set_proxy("http://humupdates.uchicago.edu:8443");
-
         m_endpoint.connect(con);
-
         // Start the ASIO io_service run loop
         m_start = std::chrono::high_resolution_clock::now();
         m_endpoint.run();
@@ -943,15 +1016,11 @@ void beginPrepare() {
 void test() {
 
     string str = "{\"commandType\":\"REFRESH_DATA\",\"data\":\"{\\\"width\\\":25,\\\"height\\\":15,\\\"tanks\\\":{\\\"ai:58\\\":{\\\"name\\\":\\\"流弊\\\",\\\"speed\\\":0,\\\"direction\\\":0,\\\"fireCd\\\":0,\\\"fire\\\":false,\\\"position\\\":[13.925306008084853,10.266874545908701],\\\"score\\\":0,\\\"rebornCd\\\":null,\\\"shieldCd\\\":1}},\\\"bullets\\\":[],\\\"blocks\\\":[{\\\"position\\\":[3,6],\\\"radius\\\":1},{\\\"position\\\":[0,10],\\\"radius\\\":1},{\\\"position\\\":[21,9],\\\"radius\\\":1},{\\\"position\\\":[11,12],\\\"radius\\\":1},{\\\"position\\\":[17,11],\\\"radius\\\":1},{\\\"position\\\":[11,2],\\\"radius\\\":1},{\\\"position\\\":[16,9],\\\"radius\\\":1},{\\\"position\\\":[14,5],\\\"radius\\\":1},{\\\"position\\\":[15,2],\\\"radius\\\":1},{\\\"position\\\":[15,11],\\\"radius\\\":1}]}\"}";
-
 }
+
 int main(int argc, char* argv[]) {
     std::string uri = "wss://tank-match.taobao.com/ai";
 
-//    string str = "{\"width\":25,\"height\":15,\"tanks\":{\"ai:58\":{\"name\":\"流弊\",\"speed\":0,\"direction\":0,\"fireCd\":0.13299999999999929,\"fire\":true,\"position\":[10.52941026611454,5.021304607616935],\"score\":0,\"rebornCd\":null,\"shieldCd\":0}},\"bullets\":[],\"blocks\":[{\"position\":[3,6],\"radius\":1},{\"position\":[0,10],\"radius\":1},{\"position\":[21,9],\"radius\":1},{\"position\":[11,12],\"radius\":1},{\"position\":[17,11],\"radius\":1},{\"position\":[11,2],\"radius\":1},{\"position\":[16,9],\"radius\":1},{\"position\":[14,5],\"radius\":1},{\"position\":[15,2],\"radius\":1},{\"position\":[15,11],\"radius\":1}]}";
-//
-//    auto j3 = json::parse(str);
-//    initMap(j3);
 
 #ifdef SIMULATE
     system("open -a /Applications/iTerm\\ 2.app /bin/bash ../tank_ai/new_game.sh");

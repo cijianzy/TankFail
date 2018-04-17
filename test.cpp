@@ -34,62 +34,46 @@ inline double angleIn2PI(double angle) {
     return angle;
 }
 
-inline double xyAttackAngle(double x, double y, double x1, double y1, double direction) {
+inline bool hasIntersection(double x1, double y1, double x2, double y2, double x3, double y3, double r) {
+    double  A = (y2 - y1) / (x2 -x1);
+    double B = -1;
+    double C = y1 - A * x1;
 
-    // 追击公式  91 * x * x = y * y - 6*x*y*cos(θ)
-    y = -y;
-    y1 = -y1;
+    double lineDistance = abs((A*x3 + B * y3 + C) / sqrt(A*A+B*B));
 
-    cout << atan2(y - y1, x - x1) << endl;
-    double angle = angleIn2PI(atan2(y - y1, x - x1)) - direction; // 相差角度
-    angle = angleIn2PI(angle);
-    if (angle > M_PI) {
-        angle = M_2_PI - angle;
-    }
-    double distance = getDistance(x1, y1, x, y);
-    double a = -91;
-    double cosAngle = cos(angle);
-    double b = -6 * distance * cosAngle;
-    double c = distance * distance;
-    int temp = b * b - 4 * a * c;
-    double xAns;
-    if (temp < 0){
-    } else if (temp == 0) {
-        xAns = -1 * (b * 1.0) / (2 * a);
-    } else {
-        double x1 = (-1 * b + sqrt(temp))/(2 * a);
-        double x2  = (-1 * b - sqrt(temp))/(2 * a);
-        if(x1>0) {
-            xAns = x1;
-        } else {
-            xAns = x2;
-        }
+    double pointOneDistance = getDistance(x1,y1,x3,y3);
+
+    double pointTwoDistance = getDistance(x2,y2,x3,y3);
+
+    if (lineDistance > r) {
+        return false;
     }
 
-    a = 10 * xAns;
-    b = distance;
-    c = 3 * xAns;
-    double angleAns = 0;
-    if (abs(a+c-b) < 0.001) {
-        angleAns = 0;
-    } else {
-        angleAns = acos((b * b + a * a - c * c)/ (2 * a* b));
-        double tempAngle = atan2(y1 - y, x1 - x);
-        if (angleIn2PI(direction - tempAngle) > 3.14) {
-            angleAns = atan2(y1 - y, x1 - x) - angleAns;
-        } else {
-            angleAns = atan2(y1 - y, x1 - x) + angleAns;
-        }
+    // 一个点在圆，一定有交点
+    if (pointOneDistance == r || pointTwoDistance == r) {
+        return true;
     }
 
-    angleAns = angleIn2PI(angleAns);
+    if (min(pointOneDistance, pointTwoDistance) < r &&  max(pointOneDistance, pointTwoDistance) > r) {
+        return true;
+    }
 
-    return angleAns;
+    double pointDistanceSelf = getDistance(x1, y1, x2, y2);
+    double beta = acos((pointOneDistance * pointOneDistance +
+                        pointTwoDistance * pointTwoDistance -
+                        pointDistanceSelf * pointDistanceSelf) / (2 * pointOneDistance * pointTwoDistance));
 
+    if (pointOneDistance > r &&
+        pointTwoDistance > r &&
+        beta > M_PI / 2) {
+        return true;
+    }
+
+    return false;
 }
 
 int main() {
-//    cout << cos(3.14) << endl;
-    xyAttackAngle( 5.85472 ,  8.8623, 0 , 1.14909, 3.75246);
+    cout << hasIntersection(0, 1, 0, -1 ,0 , 0 , 0.5 ) << endl;
+    cout << hasIntersection(0, 1, 0, -1 ,1.0001, 0 , 1 ) << endl;
 }
 //attack func myPosition: 11.5444 6.9601targetId ai:132targetPosition: 3.68668 15 targetDirection: 0.994838 result: 3.71427
