@@ -67,7 +67,7 @@ vector<tuple<int,int>> radiusTDDistanceCircle;
 vector<tuple<int,int>> bDArea;
 
 //perftest endpoint;
-std::set<std::string> myTankSet = {"ai:58"};
+std::set<std::string> myTankSet = {"ai:58", "ai:41"};
 
 int mv4Step[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
 
@@ -353,13 +353,13 @@ inline bool hasIntersection(double x1, double y1, double x2, double y2, double x
     }
 
     // 一个点在圆，一定有交点
-    if (pointOneDistance == r || pointTwoDistance == r) {
-        return true;
-    }
-
-    if (min(pointOneDistance, pointTwoDistance) < r &&  max(pointOneDistance, pointTwoDistance) > r) {
-        return true;
-    }
+//    if (pointOneDistance == r || pointTwoDistance == r) {
+//        return true;
+//    }
+//
+//    if (min(pointOneDistance, pointTwoDistance) < r &&  max(pointOneDistance, pointTwoDistance) > r) {
+//        return true;
+//    }
 
     double pointDistanceSelf = getDistance(x1, y1, x2, y2);
     double beta = acos((pointOneDistance * pointOneDistance +
@@ -454,13 +454,14 @@ inline void clearBfsAV() {
 
 int **vMap = NULL;
 
+inline tuple<double, double> runOutCorner() {
+    return make_pair(tankMap->width/2, tankMap->height/2);
+};
 
 inline tuple<double, double> runForWin() {
     int bBfsAV  =  0;
     int eBfsAV = 0;
-
     clearBfsAV();
-
     mapClear(vMap);
 
     vector<int> tv;
@@ -483,13 +484,15 @@ inline tuple<double, double> runForWin() {
             int ny = y + mv4Step[i][1];
 
             if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
-                // TODO_CIJIAN  2018 ,Apr16 , Mon, 15:52
-                if (true) {
 
+                tuple<float, float> trueCoordinate = mapCoordinateToTrue(nx,ny);
+                AttackObject *ao = canXYAttack(get<0>(trueCoordinate), get<1>(trueCoordinate));
+
+                if (ao != nullptr && ao->canAttack == true){
+                    return make_pair(get<0>(trueCoordinate), get<1>(trueCoordinate));
                 }
 
                 vector<int> tv1;
-
                 tv1.push_back(nx);
                 tv1.push_back(ny);
                 vMap[nx][ny] = 1;
