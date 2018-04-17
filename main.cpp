@@ -480,8 +480,9 @@ inline tuple<double, double> runForWin() {
         int y = bfsSV[bBfsAV][1];
 
         for (int i = 0 ;i < 4 ; ++ i) {
-            int nx = x + mv4Step[i][0];
-            int ny = y + mv4Step[i][1];
+
+            int nx = x + mv4Step[i][0] * mapMultiple;
+            int ny = y + mv4Step[i][1] * mapMultiple;
 
             if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
 
@@ -490,6 +491,10 @@ inline tuple<double, double> runForWin() {
 
                 if (ao != nullptr && ao->canAttack == true){
                     return make_pair(get<0>(trueCoordinate), get<1>(trueCoordinate));
+                }
+
+                if (bBfsAV > 20) {
+                    return make_pair(tankMap->width/2, tankMap->height/2);
                 }
 
                 vector<int> tv1;
@@ -503,7 +508,7 @@ inline tuple<double, double> runForWin() {
         ++ bBfsAV;
     }
 
-    return make_pair(-1,-1);
+    return make_pair(16 * 20, 10 * 20);
 }
 
 inline tuple<double, double> runForLife(int **map) {
@@ -554,7 +559,7 @@ inline tuple<double, double> runForLife(int **map) {
         ++ bbfsSV;
     }
 
-    return make_pair(-1,-1);
+    return make_pair(tankMap->width/2, tankMap->height/2);
 }
 
 inline void theLastBattle() {
@@ -601,8 +606,9 @@ inline void solve() {
     } else if (!isNowSafeForTank()) {
         tuple<double, double> nearestSafeCoordinate = runForLife(tankMap->tDMap);
         goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
-    } else {
-       stay();
+    } else if (ao == nullptr || ao->canAttack == false){
+        tuple<double, double> attackPosition = runForWin();
+        goTo(get<0>(attackPosition), get<1>(attackPosition));
     }
 }
 

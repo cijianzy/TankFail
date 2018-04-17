@@ -53,5 +53,5 @@ for line in file:
         draw.point((x, y), 'red')
 
 
-draw.point((round(23*20) ,round(2.6* 20)), 'blue')
+draw.point((round(16 *20) ,round(10*20)), 'blue')
 im.save("test.PNG", "PNG")
