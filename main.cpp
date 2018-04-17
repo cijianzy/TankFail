@@ -391,7 +391,7 @@ inline bool canAttackTo(AttackObject *ao) {
     ao->canAttack = true;
 
     // 是否有护盾
-    if (ao->delay + ao->flyTime > ao->target->shieldCd) {
+    if (ao->delay + ao->flyTime < ao->target->shieldCd) {
         ao->canAttack = false;
         return ao->canAttack;
     }
