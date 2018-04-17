@@ -390,11 +390,20 @@ inline bool canAttackTo(AttackObject *ao) {
 
     ao->canAttack = true;
 
+    // 是否有护盾
+    if (ao->delay + ao->flyTime > ao->target->shieldCd) {
+        ao->canAttack = false;
+        return ao->canAttack;
+    }
+
+    // 命中点是否在区域内
     if (!isInTrueMapRange(ao->collideX, ao->collideY)) {
         ao->canAttack = false;
         return ao->canAttack;
     }
 
+    // TODO_CIJIAN  2018 ,Apr17 , Tue, 12:37
+    // 需要debug
     for (auto it = tankMap->blocks.begin() ;it != tankMap->blocks.end(); ++it) {
         if (hasIntersection(ao->x, ao->y, ao->collideX, ao->collideY, (*it)->x, (*it)->y, (*it)->radius)) {
             cout << "can not attack" <<ao->x <<", "<< ao->y << ", " << ao->collideX << ", "<< ao->collideY << ", " << (*it)->x << ", " << (*it)->y << ", " << (*it)->radius << endl;
@@ -763,7 +772,11 @@ inline void constructMapInfo(json msg) {
                     } else if (i.key() == "score") {
                         newTank->score = i.value();
                     } else if (i.key() == "shieldCd") {
-                        newTank->shieldCd = i.value();
+                        if (i.value() == nullptr) {
+                            newTank->shieldCd = 0;
+                        } else {
+                            newTank->shieldCd = i.value();
+                        }
                     } else if (i.key() == "position") {
                         newTank->x =  i.value()[0];
                         newTank->y =  i.value()[1];
