@@ -992,8 +992,8 @@ public:
 
     void on_open(websocketpp::connection_hdl hdl) {
         m_open = std::chrono::high_resolution_clock::now();
-        m_endpoint.send(hdl, "{\"commandType\": \"aiEnterRoom\", \"roomId\": 101550, \"accessKey\": "
-                             "\"248c641ededfc6d91bbc31bb2e2056ee\", \"employeeId\": 101550}", websocketpp::frame::opcode::text);
+        m_endpoint.send(hdl, "{\"commandType\": \"aiEnterRoom\", \"roomId\": 67718, \"accessKey\": "
+                             "\"96b69e5beaab0ac5dc5b6c8e9739d102\", \"employeeId\": 159806}", websocketpp::frame::opcode::text);
     }
     void on_message(websocketpp::connection_hdl hdl, message_ptr msg) {
         m_message = std::chrono::high_resolution_clock::now();
