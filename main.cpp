@@ -433,8 +433,8 @@ inline AttackObject* canXYAttack(double x, double y) {
     for (auto it = tankMap->tanks.begin(); it != tankMap->tanks.end(); ++it ) {
         if ((*it)->rebornCd < 0.00001) {
             AttackObject *ao = new AttackObject();
-            ao->x = myTank->x;
-            ao->y = myTank->y;
+            ao->x = x;
+            ao->y = y;
             ao->target = (*it);
             if (canAttackTo(ao)) {
                 return ao;
