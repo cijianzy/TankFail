@@ -17,6 +17,8 @@
 //#define TEST
 #define SIMULATE
 
+//#define COMPETE
+
 
 using namespace std;
 
@@ -80,7 +82,11 @@ vector<tuple<int,int>> searchOrder;
 vector<tuple<int,int>> bDArea;
 
 //perftest endpoint;
+#ifdef COMPETE
+std::set<std::string> myTankSet = {"ai:41"};
+#else
 std::set<std::string> myTankSet = {"ai:58"};
+#endif
 
 int mv4Step[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
 
@@ -507,7 +513,9 @@ inline tuple<double, double> runForWin() {
                     return make_pair(get<0>(trueCoordinate), get<1>(trueCoordinate));
                 }
 
-                if (bBfsAV > 20) {
+                if (bBfsAV > 200) {
+#ifdef SIMULATE
+#endif
                     return make_pair(16, 10.3);
                 }
 
@@ -1012,9 +1020,15 @@ public:
 
     void on_open(websocketpp::connection_hdl hdl) {
         m_open = std::chrono::high_resolution_clock::now();
+#ifdef COMPETE
+        m_endpoint.send(hdl, "{\"commandType\": \"aiEnterRoom\", \"roomId\": 67718, \"accessKey\": "
+                             "\"96b69e5beaab0ac5dc5b6c8e9739d102\", \"employeeId\": 159806}", websocketpp::frame::opcode::text);
+#else
         m_endpoint.send(hdl, "{\"commandType\": \"aiEnterRoom\", \"roomId\": 101550, \"accessKey\": "
                              "\"248c641ededfc6d91bbc31bb2e2056ee\", \"employeeId\": 101550}", websocketpp::frame::opcode::text);
+#endif
     }
+
     void on_message(websocketpp::connection_hdl hdl, message_ptr msg) {
         m_message = std::chrono::high_resolution_clock::now();
         ghdl = hdl;
@@ -1124,11 +1138,15 @@ void test() {
 
 int main(int argc, char* argv[]) {
     std::string uri = "wss://tank-match.taobao.com/ai";
+#ifdef COMPETE
+
+#else
 
 #ifdef SIMULATE
+    system("open -a /Applications/Utilities/Terminal.app /bin/bash ../tank_ai/new_game.sh");
 #endif
 
-    system("open -a /Applications/Utilities/Terminal.app /bin/bash ../tank_ai/new_game.sh");
+#endif
 
     beginPrepare();
 
