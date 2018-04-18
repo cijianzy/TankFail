@@ -730,8 +730,8 @@ inline void solve() {
 //
 //
 //        }
-//        return;
 #endif
+        return;
     }
 
     clock_t tBClock = clock();
