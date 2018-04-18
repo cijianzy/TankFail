@@ -525,7 +525,7 @@ inline tuple<double, double> runForWin() {
     return make_pair(16, 10.3);
 }
 
-inline tuple<double, double> runForLife(int **map) {
+inline tuple<double, double> runForLife(bool isRunOutTankAttack) {
     int bbfsSV  =  0;
     int ebfsSV = 0;
 
@@ -555,19 +555,21 @@ inline tuple<double, double> runForLife(int **map) {
             if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
                 // 如果发现安全区域
                 //
-                if (tankMap->dMap[nx][ny] == 0 && map[nx][ny] == 0) {
+                //
+                if (tankMap->dMap[nx][ny] == 0 && tankMap->bDMap[nx][ny] == 0 && (!isRunOutTankAttack || tankMap->tDMap[nx][ny] == 0)) {
                     // 反的安全区域
                     tuple<float, float> tureCoordinate = mapCoordinateToTrue(nx,ny);
                     return make_pair(get<0>(tureCoordinate), get<1>(tureCoordinate));
                 }
-
-                vector<int> tv1;
-
-                tv1.push_back(nx);
-                tv1.push_back(ny);
-                vMap[nx][ny] = 1;
-                bfsSV.push_back(tv1);
-                ++ ebfsSV;
+                // 如果是逃脱坦克攻击的话，子弹攻击区域一定不能走
+                if (!isRunOutTankAttack || tankMap->bDMap[nx][ny] == 0 ) {
+                    vector<int> tv1;
+                    tv1.push_back(nx);
+                    tv1.push_back(ny);
+                    vMap[nx][ny] = 1;
+                    bfsSV.push_back(tv1);
+                    ++ebfsSV;
+                }
             }
         }
         ++ bbfsSV;
@@ -762,7 +764,7 @@ inline void solve() {
 
     if (!isNowSafeForBullet()) {
         clock_t tBClock = clock();
-        tuple<double, double> nearestSafeCoordinate = runForLife(tankMap->bDMap);
+        tuple<double, double> nearestSafeCoordinate = runForLife(false);
         clock_t tEClock = clock();
         caculateClock(tBClock, tEClock, "runForLife");
         goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
@@ -780,16 +782,23 @@ inline void solve() {
         caculateClock(tBClock, tEClock, "constructTDMap");
 
         if (!isNowSafeForTank()) {
-            tuple<double, double> nearestSafeCoordinate = runForLife(tankMap->tDMap);
+            tuple<double, double> nearestSafeCoordinate = runForLife(true);
             goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
             isScape = true;
         }
         if (!isScape) {
+
+            tBClock = clock();
+
+
             if ((ao == nullptr || ao->canAttack == false)) {
                 tuple<double, double> attackPosition = runForWin();
                 goTo(get<0>(attackPosition), get<1>(attackPosition));
                 isAttack = true;
             }
+            tEClock = clock();
+
+            caculateClock(tBClock, tEClock, "canAttack");
         }
 //        else {
 //                goTo(16, 10.3);
