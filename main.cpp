@@ -17,7 +17,7 @@
 //#define TEST
 #define SIMULATE
 
-//#define COMPETE
+#define COMPETE
 
 
 using namespace std;
