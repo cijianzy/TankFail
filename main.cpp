@@ -56,11 +56,12 @@ typedef websocketpp::lib::shared_ptr<boost::asio::ssl::context> context_ptr;
 typedef client::connection_ptr connection_ptr;
 
 int turn = 0;
-int mapMultiple = 20;
-double trueMapWidth = 25;
-double trueMapHeight = 15;
+int mapMultiple = 20; // 格子地图放大倍数
+int searchStepLength = 5;
+double trueMapWidth = 25; // 真实地图宽度
+double trueMapHeight = 15; // 真实地图长度
 
-double bulletDWideMultiple = 1.1;
+double bulletDWideMultiple = 1.1; // 子弹的宽度，相应扩宽一点
 float tDDistance = 6; // 坦克的伤害半径
 float bDDistance = 5; // 子弹的伤害远度
 float maxRebornCd = 20; // 最大复活时间
@@ -68,6 +69,7 @@ float maxRebornCd = 20; // 最大复活时间
 int TDTYPE = -2;
 int BLDTYPE = -1;
 int BUDTYPE = -3;
+
 
 bool isSimulateDie = false; // 是否是模拟死亡场
 
@@ -78,7 +80,7 @@ vector<tuple<int,int>> searchOrder;
 vector<tuple<int,int>> bDArea;
 
 //perftest endpoint;
-std::set<std::string> myTankSet = {"ai:58", "ai:41"};
+std::set<std::string> myTankSet = {"ai:58"};
 
 int mv4Step[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
 
@@ -98,7 +100,7 @@ public:
             x, // 坦克的当前位置 X
             y, // 坦克的当前位置 Y
             rebornCd = 0, // 复活冷却时间，即被击毁后还有多久可复活 null 表示在场上战斗的状态
-            shieldCd; // 护盾剩余时间
+            shieldCd = 0; // 护盾剩余时间
     string name;
     bool fire;
     float radius = 1;
@@ -355,7 +357,8 @@ inline bool hasIntersection(double x1, double y1, double x2, double y2, double x
 
     double pointTwoDistance = getDistance(x2,y2,x3,y3);
 
-    if (lineDistance > r) {
+    // 会打到石头 设置一下会不会好点?
+    if (lineDistance > r + 0.01) {
         return false;
     }
 
@@ -402,7 +405,7 @@ inline bool canAttackTo(AttackObject *ao) {
     ao->canAttack = true;
 
     // 是否有护盾 + tick 时间
-    if (ao->delay + ao->flyTime + 0.016 <= ao->target->shieldCd ) {
+    if (ao->delay + ao->flyTime + 0.016 < ao->target->shieldCd ) {
         ao->canAttack = false;
         return ao->canAttack;
     }
@@ -546,8 +549,8 @@ inline tuple<double, double> runForLife(int **map) {
         int y = bfsSV[bbfsSV][1];
 
         for (int i = 0 ;i < 4 ; ++ i) {
-            int nx = x + mv4Step[i][0];
-            int ny = y + mv4Step[i][1];
+            int nx = x + mv4Step[i][0] * searchStepLength;
+            int ny = y + mv4Step[i][1] * searchStepLength;
 
             if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
                 // 如果发现安全区域
@@ -604,7 +607,7 @@ inline void constructTDMap() {
                 tankMap->tDMap[tx][ty] = TDTYPE;
             }
 #ifdef TEST
-            myfile << tx << "," << ty << endl;
+            //myfile << tx << "," << ty << endl;
 #endif
         }
     }
@@ -654,7 +657,7 @@ inline void constructBDMap() {
             }
 
 #ifdef SIMULATE
-            myfile << nx << "," << ny << endl;
+            //myfile << nx << "," << ny << endl;
 #endif
         }
     }
@@ -684,7 +687,7 @@ inline void constructBDMap() {
             if (count == 4) {
                 tankMap->bDMap[i][j] = BUDTYPE;
 #ifdef SIMULATE
-                myfile << i << "," << j << endl;
+                //myfile << i << "," << j << endl;
 #endif
 
             }
@@ -704,25 +707,34 @@ inline void solve() {
 
 #ifdef SIMULATE
 
-        if (!isSimulateDie) {
-
-            ofstream myfile;
-            myfile.open("commands.txt");
-            if (turn >= 100 && myTank->rebornCd > maxRebornCd - 0.1) {
-                getMessage(tMessages[tMessages.size() - 2]);
-
-                for (int  i = 0; i <  tCommands.size() ;i ++ ) {
-                    myfile << tCommands[i] << endl;
-                }
-
-                myfile.close();
-                isSimulateDie = true;
+//        if (!isSimulateDie) {
+//
+//            ofstream myfile;
+//            myfile.open("commands.txt");
+//            isSimulateDie = true;
+//            if (turn >= 100 && myTank->rebornCd > maxRebornCd - 0.1) {
+//                getMessage(tMessages[tMessages.size() - 10]);
+//                for (int  i = 0; i <  tCommands.size() ;i ++ ) {
+//                    myfile << tCommands[i] << endl;
+//                }
+//                myfile.close();
+//
+//                myfile.open("messages.txt");
+//                for (int  i = 0; i <  tMessages.size() ;i ++ ) {
+//                    myfile << tMessages[i] << endl;
+//                }
+//                myfile.close();
+//                isSimulateDie = false;
 //                assert(0);
-            }
-        }
+//            }
+//
+//
+//        }
+//        return;
 #endif
-        return;
     }
+
+    clock_t tBClock = clock();
 
     AttackObject *ao = canXYAttack(myTank->x, myTank->y);
     if (ao != nullptr && ao->canAttack == true){
@@ -731,49 +743,59 @@ inline void solve() {
         stay();
     }
 
+    clock_t tEClock = clock();
+    caculateClock(tBClock, tEClock, "canXYAttack");
+
+
     bool isScape = false;
     bool isAttack = false;
     // bullet 和 tank 分开讨论, 优先子弹
     // 先构建子弹伤害
 
-    clock_t tBClock = clock();
+    tBClock = clock();
 
     constructBDMap();
 
-    clock_t tEClock = clock();
+    tEClock = clock();
 
     caculateClock(tBClock, tEClock, "constructBDMap");
 
     if (!isNowSafeForBullet()) {
+        clock_t tBClock = clock();
         tuple<double, double> nearestSafeCoordinate = runForLife(tankMap->bDMap);
+        clock_t tEClock = clock();
+        caculateClock(tBClock, tEClock, "runForLife");
         goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
         isScape = true;
     }
 
-//    if (!isScape) {
-//        constructTDMap();
-//        if (!isNowSafeForTank()) {
-//            tuple<double, double> nearestSafeCoordinate = runForLife(tankMap->tDMap);
-//            goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
-//            isScape = true;
-//        }
-//
-//
-//
-//            // TODO_CIJIAN  2018 ,Apr18 , Wed, 11:09
-//            stay();
-//        }
-////
-//        if (!isScape) {
-//            if ((ao == nullptr || ao->canAttack == false)) {
-//                tuple<double, double> attackPosition = runForWin();
-//                goTo(get<0>(attackPosition), get<1>(attackPosition));
-//                isAttack = true;
-//            } else {
+    if (!isScape) {
+
+        tBClock = clock();
+
+        constructTDMap();
+
+        tEClock = clock();
+
+        caculateClock(tBClock, tEClock, "constructTDMap");
+
+        if (!isNowSafeForTank()) {
+            tuple<double, double> nearestSafeCoordinate = runForLife(tankMap->tDMap);
+            goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
+            isScape = true;
+        }
+        if (!isScape) {
+            if ((ao == nullptr || ao->canAttack == false)) {
+                tuple<double, double> attackPosition = runForWin();
+                goTo(get<0>(attackPosition), get<1>(attackPosition));
+                isAttack = true;
+            }
+        }
+//        else {
 //                goTo(16, 10.3);
 //            }
 //        }
-//    }
+    }
 }
 
 inline void constructMapInfo(json msg) {
@@ -848,9 +870,6 @@ inline void constructMapInfo(json msg) {
 
         // 对坦克按照距离排序
         sort(tankMap->tanks.begin(), tankMap->tanks.end(), compareTank);
-//        for (auto it = tankMap->tanks.begin() ;it != tankMap->tanks.end(); ++it) {
-//            cout << (*it)->distance << endl;
-//        }
     }
 
 }
@@ -1044,7 +1063,7 @@ void beginPrepare() {
                 tankMap->dMap[tx][ty] = BLDTYPE;
             }
 #ifdef TEST
-            myfile << tx << "," << ty << endl;
+            //myfile << tx << "," << ty << endl;
 #endif
         }
 
@@ -1098,10 +1117,11 @@ int main(int argc, char* argv[]) {
     std::string uri = "wss://tank-match.taobao.com/ai";
 
 #ifdef SIMULATE
-    system("open -a /Applications/Utilities/Terminal.app /bin/bash ../tank_ai/new_game.sh");
 #endif
-    beginPrepare();
 
+    system("open -a /Applications/Utilities/Terminal.app /bin/bash ../tank_ai/new_game.sh");
+
+    beginPrepare();
 
     if (argc == 2) {
         uri = argv[1];
