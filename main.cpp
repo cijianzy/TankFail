@@ -17,7 +17,7 @@
 //#define TEST
 #define SIMULATE
 
-#define COMPETE
+//#define COMPETE
 
 
 using namespace std;
@@ -59,14 +59,18 @@ typedef client::connection_ptr connection_ptr;
 
 int turn = 0;
 int mapMultiple = 20; // 格子地图放大倍数
-int searchStepLength = 5;
 double trueMapWidth = 25; // 真实地图宽度
 double trueMapHeight = 15; // 真实地图长度
+
+// 2,200  和 5，400 都还不错
+int searchStepLength = 3; // 探索步长
+int maxExploreNumber = 200;
 
 double bulletDWideMultiple = 1.1; // 子弹的宽度，相应扩宽一点
 float tDDistance = 6; // 坦克的伤害半径
 float bDDistance = 5; // 子弹的伤害远度
 float maxRebornCd = 20; // 最大复活时间
+
 
 int TDTYPE = -2;
 int BLDTYPE = -1;
@@ -330,6 +334,8 @@ inline void xyAttackAngle(AttackObject *ao) {
     b = distance;
     c = 3 * xAns;
     double angleAns = 0;
+
+    // TODO_CIJIAN  2018 ,Apr18 , Wed, 23:03
     if (abs(a+c-b) < 0.001) {
         angleAns = 0;
     } else {
@@ -353,7 +359,8 @@ inline void xyAttackAngle(AttackObject *ao) {
 
 inline bool hasIntersection(double x1, double y1, double x2, double y2, double x3, double y3, double r) {
 
-    double  A = (y2 - y1) / (x2 -x1);
+    // 除0
+    double A = (y2 - y1) / (x2 -x1);
     double B = -1;
     double C = y1 - A * x1;
 
@@ -369,7 +376,7 @@ inline bool hasIntersection(double x1, double y1, double x2, double y2, double x
     }
 
     // 两个点在圆上 一定有交点
-    if (pointOneDistance == r && pointTwoDistance == r) {
+    if (pointOneDistance < r || pointTwoDistance < r) {
         return true;
     }
     // 一个点在圆，一定有交点
@@ -411,7 +418,7 @@ inline bool canAttackTo(AttackObject *ao) {
     ao->canAttack = true;
 
     // 是否有护盾 + tick 时间
-    if (ao->delay + ao->flyTime + 0.016 < ao->target->shieldCd ) {
+    if (ao->delay + ao->flyTime + 0.46 < ao->target->shieldCd ) {
         ao->canAttack = false;
         return ao->canAttack;
     }
@@ -501,8 +508,8 @@ inline tuple<double, double> runForWin() {
 
         for (int i = 0 ;i < 4 ; ++ i) {
 
-            int nx = x + mv4Step[i][0] * mapMultiple;
-            int ny = y + mv4Step[i][1] * mapMultiple;
+            int nx = x + mv4Step[i][0] * searchStepLength;
+            int ny = y + mv4Step[i][1] * searchStepLength;
 
             if (isInMapRange(nx,ny) && vMap[nx][ny] == 0) {
 
@@ -513,7 +520,7 @@ inline tuple<double, double> runForWin() {
                     return make_pair(get<0>(trueCoordinate), get<1>(trueCoordinate));
                 }
 
-                if (bBfsAV > 200) {
+                if (bBfsAV > 500) {
 #ifdef SIMULATE
 #endif
                     return make_pair(16, 10.3);
@@ -551,6 +558,11 @@ inline tuple<double, double> runForLife(bool isRunOutTankAttack) {
     vMap[nx][ny] = 1;
     bfsSV.push_back(tv);
 
+    tuple<double , double> ansCo;
+
+    double nearCoordinatecount = 0;
+    double minDistance = 25 * 10;
+
 
     while(bbfsSV <= ebfsSV) {
         int x = bfsSV[bbfsSV][0];
@@ -566,8 +578,18 @@ inline tuple<double, double> runForLife(bool isRunOutTankAttack) {
                 //
                 if (tankMap->dMap[nx][ny] == 0 && tankMap->bDMap[nx][ny] == 0 && (!isRunOutTankAttack || tankMap->tDMap[nx][ny] == 0)) {
                     // 反的安全区域
+                    nearCoordinatecount ++;
+
                     tuple<float, float> tureCoordinate = mapCoordinateToTrue(nx,ny);
-                    return make_pair(get<0>(tureCoordinate), get<1>(tureCoordinate));
+                    double distance = getDistance(myTank->x, myTank->y, get<0>(tureCoordinate), get<1>(tureCoordinate));
+                    if (distance < minDistance) {
+                        minDistance =  distance;
+                        ansCo = make_pair(get<0>(tureCoordinate), get<1>(tureCoordinate));
+                    }
+
+                    if (nearCoordinatecount == maxExploreNumber) {
+                        return ansCo;
+                    }
                 }
                 // 如果是逃脱坦克攻击的话，子弹攻击区域一定不能走
                 if (!isRunOutTankAttack || tankMap->bDMap[nx][ny] == 0 ) {
