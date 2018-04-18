@@ -1,382 +1,244 @@
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": 166.457051}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": -1}
-14.764550 , 5.851972{"commandType": "direction", "angle": 159.668075}
-14.764550 , 5.851972{"commandType": "direction", "angle": 293.101203}
-14.764550 , 5.851972{"commandType": "direction", "angle": 293.101203}
-14.764550 , 5.851972{"commandType": "direction", "angle": 291.361991}
-14.764550 , 5.851972{"commandType": "direction", "angle": 291.361991}
-14.764550 , 5.851972{"commandType": "direction", "angle": 291.361991}
-14.764550 , 5.851972{"commandType": "direction", "angle": 291.361991}
-14.764550 , 5.851972{"commandType": "direction", "angle": 291.361991}
+3.314472 , 1.872842{"commandType": "direction", "angle": 358.311751}
+3.314472 , 1.872842{"commandType": "fire"}
+3.314472 , 1.872842{"commandType": "direction", "angle": -1}
+3.314472 , 1.872842{"commandType": "direction", "angle": 357.037648}
+3.314472 , 1.872842{"commandType": "fire"}
+3.314472 , 1.872842{"commandType": "direction", "angle": -1}
+3.314472 , 1.872842{"commandType": "direction", "angle": 356.112867}
+3.314472 , 1.872842{"commandType": "fire"}
+3.314472 , 1.872842{"commandType": "direction", "angle": -1}
+3.314472 , 1.872842{"commandType": "direction", "angle": 354.979302}
+3.314472 , 1.872842{"commandType": "fire"}
+3.314472 , 1.872842{"commandType": "direction", "angle": -1}
+3.314472 , 1.872842{"commandType": "direction", "angle": 354.258471}
+3.314472 , 1.872842{"commandType": "fire"}
+3.314472 , 1.872842{"commandType": "direction", "angle": -1}
+3.314472 , 1.872842{"commandType": "direction", "angle": 354.273825}
+3.314472 , 1.872842{"commandType": "fire"}
+3.314472 , 1.872842{"commandType": "direction", "angle": -1}
+3.314472 , 1.872842{"commandType": "direction", "angle": 182.815491}
+3.314472 , 1.872842{"commandType": "direction", "angle": 268.992384}
+3.263503 , 1.871063{"commandType": "direction", "angle": 269.057790}
+2.930706 , 1.859441{"commandType": "direction", "angle": 271.455323}
+16.469677 , 1.140527{"commandType": "direction", "angle": 48.328178}
+16.469677 , 1.140527{"commandType": "fire"}
+16.469677 , 1.140527{"commandType": "direction", "angle": -1}
+16.139877 , 1.129011{"commandType": "direction", "angle": 49.572441}
+16.139877 , 1.129011{"commandType": "fire"}
+16.139877 , 1.129011{"commandType": "direction", "angle": -1}
+16.028946 , 1.125137{"commandType": "direction", "angle": 51.229796}
+16.028946 , 1.125137{"commandType": "fire"}
+16.028946 , 1.125137{"commandType": "direction", "angle": -1}
+16.028946 , 1.125137{"commandType": "direction", "angle": 53.758476}
+16.028946 , 1.125137{"commandType": "fire"}
+16.028946 , 1.125137{"commandType": "direction", "angle": -1}
+16.206081 , 1.328908{"commandType": "direction", "angle": 55.515317}
+16.206081 , 1.328908{"commandType": "fire"}
+16.206081 , 1.328908{"commandType": "direction", "angle": -1}
+16.393059 , 1.544001{"commandType": "direction", "angle": 57.529754}
+16.393059 , 1.544001{"commandType": "fire"}
+16.393059 , 1.544001{"commandType": "direction", "angle": -1}
+16.422581 , 1.577962{"commandType": "direction", "angle": 60.652701}
+16.422581 , 1.577962{"commandType": "fire"}
+16.422581 , 1.577962{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 125.356101}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 124.704132}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 123.475641}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 122.943255}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 122.146103}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 121.030542}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 164.588489}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 165.773418}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 167.413401}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 169.033713}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 132.709210}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 162.918549}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 165.405653}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 166.758932}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.405159 , 2.816300{"commandType": "direction", "angle": 168.535054}
+17.405159 , 2.816300{"commandType": "fire"}
+17.405159 , 2.816300{"commandType": "direction", "angle": -1}
+17.129871 , 2.890064{"commandType": "direction", "angle": 170.428410}
+17.129871 , 2.890064{"commandType": "fire"}
+17.129871 , 2.890064{"commandType": "direction", "angle": -1}
+17.129871 , 2.890064{"commandType": "direction", "angle": 172.853182}
+17.129871 , 2.890064{"commandType": "fire"}
+17.129871 , 2.890064{"commandType": "direction", "angle": -1}
+17.129871 , 2.890064{"commandType": "direction", "angle": 174.710775}
+17.129871 , 2.890064{"commandType": "fire"}
+17.129871 , 2.890064{"commandType": "direction", "angle": -1}
+17.129871 , 2.890064{"commandType": "direction", "angle": 15.723428}
+17.129871 , 2.890064{"commandType": "fire"}
+17.129871 , 2.890064{"commandType": "direction", "angle": -1}
+17.129871 , 2.890064{"commandType": "direction", "angle": 13.348609}
+17.129871 , 2.890064{"commandType": "fire"}
+17.129871 , 2.890064{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 352.111469}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 349.476027}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 177.565316}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 176.170359}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 174.977944}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 173.757116}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 172.701675}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 120.837589}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 121.843786}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 123.092713}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 126.549950}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 128.554583}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 131.546643}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 133.072125}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 171.424498}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 170.420473}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+17.523968 , 2.995662{"commandType": "direction", "angle": 168.042475}
+17.523968 , 2.995662{"commandType": "fire"}
+17.523968 , 2.995662{"commandType": "direction", "angle": -1}
+16.643938 , 3.135045{"commandType": "direction", "angle": 163.584301}
+16.643938 , 3.135045{"commandType": "fire"}
+16.643938 , 3.135045{"commandType": "direction", "angle": -1}
+16.643938 , 3.135045{"commandType": "direction", "angle": 123.594828}
+16.643938 , 3.135045{"commandType": "fire"}
+16.643938 , 3.135045{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 174.101290}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 0.000000}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 201.960935}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 201.426541}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 200.831249}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 93.055788}
+16.005825 , 3.487421{"commandType": "fire"}
+16.005825 , 3.487421{"commandType": "direction", "angle": -1}
+16.005825 , 3.487421{"commandType": "direction", "angle": 277.277786}
+16.011675 , 3.439778{"commandType": "direction", "angle": 93.350053}
+16.011675 , 3.439778{"commandType": "fire"}
+16.011675 , 3.439778{"commandType": "direction", "angle": -1}
+16.011675 , 3.439778{"commandType": "direction", "angle": 287.709124}
+16.011675 , 3.439778{"commandType": "direction", "angle": 93.350053}
+16.011675 , 3.439778{"commandType": "fire"}
+16.011675 , 3.439778{"commandType": "direction", "angle": -1}
+16.011675 , 3.439778{"commandType": "direction", "angle": 287.709124}
