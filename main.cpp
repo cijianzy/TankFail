@@ -490,8 +490,8 @@ inline tuple<double, double> runForWin() {
     bfsAV.push_back(tv);
 
     while(bBfsAV <= eBfsAV) {
-        int x = bfsSV[bBfsAV][0];
-        int y = bfsSV[bBfsAV][1];
+        int x = bfsAV[bBfsAV][0];
+        int y = bfsAV[bBfsAV][1];
 
         for (int i = 0 ;i < 4 ; ++ i) {
 
