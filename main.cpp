@@ -808,7 +808,7 @@ inline void solve() {
         tBClock= get_time::now();
         tuple<double, double> nearestSafeCoordinate = runForLife(false);
         tEClock = get_time::now();
-        caculateClock(tBClock, tEClock, "runForLife");
+        caculateClock(tBClock, tEClock, "runForLife Bullets");
         goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
         isScape = true;
     }
@@ -823,11 +823,16 @@ inline void solve() {
 
         caculateClock(tBClock, tEClock, "constructTDMap");
 
+        tBClock= get_time::now();
+
         if (!isNowSafeForTank()) {
             tuple<double, double> nearestSafeCoordinate = runForLife(true);
             goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
             isScape = true;
         }
+
+        tEClock = get_time::now();
+        caculateClock(tBClock, tEClock, "runForLife Tanks");
 
         if (!isScape) {
 
