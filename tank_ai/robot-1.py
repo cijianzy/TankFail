@@ -36,7 +36,8 @@ import math
 
 time = 0
 
-def getAngle(x,y,y1,x1):
+
+def getAngle(x,y,x1,y1):
     return math.atan2((y1-y),(x1-x));
 
 async def hello(uri):
@@ -64,10 +65,8 @@ async def hello(uri):
 
             await websocket.send(json.dumps({'commandType': 'fire'}))
 
-            if time % random.randint(1,20) == 4:
-                await websocket.send(json.dumps({'commandType': 'direction', 'angle': angle}))
-            else:
-                pass
+            await websocket.send(json.dumps({'commandType': 'direction', 'angle': angle}))
+
 
             time += 1
             print(msg)
