@@ -1088,8 +1088,8 @@ void beginPrepare() {
 
     tankMap = new Map();
     // 考虑边界问题，为了不溢出
-    tankMap->mapHeight = round(trueMapHeight) * mapMultiple + 1;
-    tankMap->mapWidth = round(trueMapWidth) * mapMultiple + 1;
+    tankMap->mapHeight = round(trueMapHeight) * mapMultiple;
+    tankMap->mapWidth = round(trueMapWidth) * mapMultiple;
     tankMap->oMap = new int*[tankMap->mapWidth + 10];
     tankMap->dMap = new int*[tankMap->mapWidth + 10];
     tankMap->bDMap = new int*[tankMap->mapWidth + 10];
