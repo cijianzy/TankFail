@@ -31,24 +31,41 @@ import websockets
 import json
 import random
 import sys
+import math
+
 
 time = 0
+
+def getAngle(x,y,y1,x1):
+    return math.atan2((y1-y),(x1-x));
 
 async def hello(uri):
 
     global time
     connect_info = {'commandType': 'aiEnterRoom', 'roomId': 101550, 'accessKey': sys.argv[1], 'employeeId': int(sys.argv[2])}
+    # connect_info = {'commandType': 'aiEnterRoom', 'roomId': 101550, 'accessKey': '96b69e5beaab0ac5dc5b6c8e9739d102', 'employeeId': 159806}
+
     print(json.dumps(connect_info))
     async with websockets.connect(uri) as websocket:
         await websocket.send(json.dumps(connect_info))
         while True:
             msg = await websocket.recv()
             msg = json.loads(msg)
+            tanks = json.loads(msg['data'])['tanks'];
+            # print(tanks)
+            # print(msg['data']['tanks'])
+
+            angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+
+            while(angle < 0) :
+                angle += 2 * math.pi
+
+            angle = angle * 360 / (2 * math.pi)
 
             await websocket.send(json.dumps({'commandType': 'fire'}))
 
             if time % random.randint(1,20) == 4:
-                await websocket.send(json.dumps({'commandType': 'direction', 'angle': random.randint(0,360)}))
+                await websocket.send(json.dumps({'commandType': 'direction', 'angle': angle}))
             else:
                 pass
 
