@@ -68,13 +68,14 @@ int mapMultiple = 20; // 格子地图放大倍数
 double trueMapWidth = 25; // 真实地图宽度
 double trueMapHeight = 15; // 真实地图长度
 
+
 // 2,200  和 5，400 都还不错
 int searchStepLength = 3; // 探索步长
-int maxExploreNumber = 200;
+int maxExploreNumber = 400;
 
 double bulletDWideMultiple = 1.1; // 子弹的宽度，相应扩宽一点
-float tDDistance = 7.7; // 坦克的伤害半径
-float bDDistance = 6.6; // 子弹的伤害远度
+float tDDistance = 6; // 坦克的伤害半径
+float bDDistance = 5; // 子弹的伤害远度
 float maxRebornCd = 20; // 最大复活时间
 
 int TDTYPE = -2;
@@ -83,11 +84,11 @@ int BUDTYPE = -3;
 
 bool isSimulateDie = false; // 是否是模拟死亡场
 
-vector<tuple<int,int>> radius1Circle;
-vector<tuple<int,int>> radius2Circle;
-vector<tuple<int,int>> radiusTDDistanceCircle;
-vector<tuple<int,int>> searchOrder;
-vector<tuple<int,int>> bDArea;
+vector<vector<int>> radius1Circle;
+vector<vector<int>> radius2Circle;
+vector<vector<int>> radiusTDDistanceCircle;
+vector<vector<int>> searchOrder;
+vector<vector<int>> bDArea;
 
 //perftest endpoint;
 #ifdef COMPETE
@@ -237,13 +238,12 @@ inline bool isXYSafeForBullet(double x, double y) {
     int nx = round(get<0>(tt));
     int ny = round(get<1>(tt));
 
-    if (isInMapRange(nx,ny) && tankMap->bDMap[nx][ny] != 0) {
+    if ((isInMapRange(nx,ny) && tankMap->bDMap[nx][ny] != 0) || !isInMapRange(nx,ny)) {
         return false;
     } else {
         return true;
     }
 }
-
 
 inline bool isXYSafeForTank(double x, double y) {
 
@@ -253,6 +253,7 @@ inline bool isXYSafeForTank(double x, double y) {
     int ny = round(get<1>(tt));
 
     if (isInMapRange(nx,ny) && tankMap->tDMap[nx][ny] != 0) {
+    if ((isInMapRange(nx,ny) && tankMap->tDMap[nx][ny] != 0) || !isInMapRange(nx,ny)) {
         return false;
     } else {
         return true;
