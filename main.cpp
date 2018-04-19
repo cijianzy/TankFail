@@ -13,7 +13,10 @@
 #include <fstream>
 #include <time.h>
 #include <unistd.h>
-
+#include <chrono>
+using namespace std;
+using  ns = chrono::nanoseconds;
+using get_time = chrono::steady_clock ;
 //#define TEST
 #define SIMULATE
 
@@ -36,16 +39,19 @@ using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
 using websocketpp::lib::bind;
 
-clock_t bClock, eClock;
+get_time::time_point  bClock, eClock;
 
 inline void caculateClock() {
-    eClock = clock();
-    cout <<"Get Message intervel : " <<(double)(eClock - bClock) / CLOCKS_PER_SEC << endl;
+    eClock = get_time::now();
+    auto diff = eClock - bClock;
+    cout <<"Get Message intervel : " << chrono::duration_cast<ns>(diff).count() * 1.0 / (1000000000) << "s" << endl;
 }
 
-inline void caculateClock(clock_t begin, clock_t end, string msg) {
-    cout << msg + ": " <<(double)(end - begin) / CLOCKS_PER_SEC << endl;
+inline void caculateClock(get_time::time_point begin, get_time::time_point end, string msg) {
+    auto diff = end - begin;
+    cout << msg + ": " << chrono::duration_cast<ns>(diff).count() * 1.0 / (1000000000) << "s" << endl;
 }
+
 int preSolveBlocks[10][2] =  {{3, 6}, {0, 10}, {21, 9}, {11, 12},{17, 11}, {11, 2}, {16, 9},{14, 5}, {15, 2}, {15, 11}};
 
 class perftest;
@@ -67,15 +73,13 @@ int searchStepLength = 3; // 探索步长
 int maxExploreNumber = 200;
 
 double bulletDWideMultiple = 1.1; // 子弹的宽度，相应扩宽一点
-float tDDistance = 6; // 坦克的伤害半径
-float bDDistance = 5; // 子弹的伤害远度
+float tDDistance = 7.7; // 坦克的伤害半径
+float bDDistance = 6.6; // 子弹的伤害远度
 float maxRebornCd = 20; // 最大复活时间
-
 
 int TDTYPE = -2;
 int BLDTYPE = -1;
 int BUDTYPE = -3;
-
 
 bool isSimulateDie = false; // 是否是模拟死亡场
 
@@ -774,7 +778,7 @@ inline void solve() {
         return;
     }
 
-    clock_t tBClock = clock();
+    auto tBClock= get_time::now();
 
     AttackObject *ao = canXYAttack(myTank->x, myTank->y);
     if (ao != nullptr && ao->canAttack == true){
@@ -783,7 +787,7 @@ inline void solve() {
         stay();
     }
 
-    clock_t tEClock = clock();
+    auto tEClock = get_time::now();
     caculateClock(tBClock, tEClock, "canXYAttack");
 
 
@@ -792,18 +796,18 @@ inline void solve() {
     // bullet 和 tank 分开讨论, 优先子弹
     // 先构建子弹伤害
 
-    tBClock = clock();
+    tBClock= get_time::now();
 
     constructBDMap();
 
-    tEClock = clock();
+    tEClock = get_time::now();
 
     caculateClock(tBClock, tEClock, "constructBDMap");
 
     if (!isNowSafeForBullet()) {
-        clock_t tBClock = clock();
+        tBClock= get_time::now();
         tuple<double, double> nearestSafeCoordinate = runForLife(false);
-        clock_t tEClock = clock();
+        tEClock = get_time::now();
         caculateClock(tBClock, tEClock, "runForLife");
         goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
         isScape = true;
@@ -811,11 +815,11 @@ inline void solve() {
 
     if (!isScape) {
 
-        tBClock = clock();
+        tBClock= get_time::now();
 
         constructTDMap();
 
-        tEClock = clock();
+        tEClock = get_time::now();
 
         caculateClock(tBClock, tEClock, "constructTDMap");
 
@@ -824,17 +828,17 @@ inline void solve() {
             goTo(get<0>(nearestSafeCoordinate), get<1>(nearestSafeCoordinate));
             isScape = true;
         }
+
         if (!isScape) {
 
-            tBClock = clock();
-
+            tBClock= get_time::now();
 
             if ((ao == nullptr || ao->canAttack == false)) {
                 tuple<double, double> attackPosition = runForWin();
                 goTo(get<0>(attackPosition), get<1>(attackPosition));
                 isAttack = true;
             }
-            tEClock = clock();
+            tEClock = get_time::now();
 
             caculateClock(tBClock, tEClock, "canAttack");
         }
@@ -956,7 +960,7 @@ void initMap(json msg) {
 inline void getMessage(string msg) {
 #ifdef SIMULATE
     caculateClock();
-    bClock = clock();
+    bClock = get_time::now();
 #endif
 
 #ifdef SIMULATE
@@ -1179,6 +1183,8 @@ int main(int argc, char* argv[]) {
 #endif
 
     beginPrepare();
+
+    bClock = get_time::now();
 
     if (argc == 2) {
         uri = argv[1];
