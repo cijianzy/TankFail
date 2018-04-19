@@ -499,7 +499,11 @@ inline tuple<double, double> runForWin() {
     ny = get<1>(co);
     tv.push_back(nx);
     tv.push_back(ny);
-    vMap[nx][ny] = 1;
+
+    if (isInMapRange(nx,ny)) {
+        vMap[nx][ny] = 1;
+    }
+
     bfsAV.push_back(tv);
 
     while(bBfsAV <= eBfsAV) {
@@ -555,7 +559,11 @@ inline tuple<double, double> runForLife(bool isRunOutTankAttack) {
     ny = get<1>(co);
     tv.push_back(nx);
     tv.push_back(ny);
-    vMap[nx][ny] = 1;
+
+    if (isInMapRange(nx,ny)) {
+        vMap[nx][ny] = 1;
+    }
+
     bfsSV.push_back(tv);
 
     tuple<double , double> ansCo;
@@ -1082,17 +1090,17 @@ void beginPrepare() {
     // 考虑边界问题，为了不溢出
     tankMap->mapHeight = round(trueMapHeight) * mapMultiple + 1;
     tankMap->mapWidth = round(trueMapWidth) * mapMultiple + 1;
-    tankMap->oMap = new int*[tankMap->mapWidth];
-    tankMap->dMap = new int*[tankMap->mapWidth];
-    tankMap->bDMap = new int*[tankMap->mapWidth];
-    tankMap->tDMap = new int*[tankMap->mapWidth];
+    tankMap->oMap = new int*[tankMap->mapWidth + 10];
+    tankMap->dMap = new int*[tankMap->mapWidth + 10];
+    tankMap->bDMap = new int*[tankMap->mapWidth + 10];
+    tankMap->tDMap = new int*[tankMap->mapWidth + 10];
     vMap = new int*[tankMap->mapWidth];
     for(int i = 0; i < tankMap->mapWidth; ++i) {
-        tankMap->oMap[i] = new int[tankMap->mapHeight];
-        tankMap->dMap[i] = new int[tankMap->mapHeight];
-        tankMap->bDMap[i] = new int[tankMap->mapHeight];
-        tankMap->tDMap[i] = new int[tankMap->mapHeight];
-        vMap[i]= new int[tankMap->mapHeight];
+        tankMap->oMap[i] = new int[tankMap->mapHeight + 10];
+        tankMap->dMap[i] = new int[tankMap->mapHeight + 10];
+        tankMap->bDMap[i] = new int[tankMap->mapHeight + 10];
+        tankMap->tDMap[i] = new int[tankMap->mapHeight + 10];
+        vMap[i]= new int[tankMap->mapHeight + 10];
     }
 
 #ifdef TEST
