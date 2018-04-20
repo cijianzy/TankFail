@@ -71,7 +71,7 @@ double trueMapHeight = 15; // 真实地图长度
 
 // 2,200  和 5，400 都还不错
 int searchStepLength = 3; // 探索步长
-int maxExploreNumber = 400;
+int maxExploreNumber = 600;
 
 double bulletDWideMultiple = 1.4; // 子弹的宽度，相应扩宽一点
 float tDDistance = 6; // 坦克的伤害半径
@@ -622,7 +622,7 @@ inline tuple<double, double> runForLife(bool isRunOutTankAttack) {
 
     bfsSV.push_back(tv);
 
-    tuple<double , double> ansCo;
+    tuple<double , double> ansCo = make_pair(myTank->x, myTank->y);
 
     double nearCoordinatecount = 0;
     double minDistance = 25 * 10;
