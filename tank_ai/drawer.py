@@ -14,17 +14,17 @@ from PIL import Image, ImageDraw
 im = Image.new('RGB',(25*20,15*20),'white')
 draw = ImageDraw.Draw(im)
 
-file = open('/Users/cijian/CLionProjects/tank/cmake-build-debug/blocks.txt', 'r');
-
-file = file.readlines();
-
-for line in file:
-    cordi = line.split(',')
-    x = int(cordi[0])
-    y = int(cordi[1])
-    print(x, y)
-    if x >= 0 and x <= 25*20 and y >= 0 and y <= 15* 20:
-        draw.point((x, y), 'black')
+# file = open('/Users/cijian/CLionProjects/tank/cmake-build-debug/blocks.txt', 'r');
+#
+# file = file.readlines();
+#
+# for line in file:
+#     cordi = line.split(',')
+#     x = int(cordi[0])
+#     y = int(cordi[1])
+#     print(x, y)
+#     if x >= 0 and x <= 25*20 and y >= 0 and y <= 15* 20:
+#         draw.point((x, y), 'black')
 
 #
 # file = open('/Users/cijian/CLionProjects/tank/cmake-build-debug/tanks.txt', 'r');
@@ -53,5 +53,5 @@ for line in file:
         draw.point((x, y), 'red')
 
 
-draw.point((round(16 *20) ,round(10*20)), 'blue')
+draw.point((round(16 *20) ,round(10.6*20)), 'blue')
 im.save("test.PNG", "PNG")
