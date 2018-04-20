@@ -1,0 +1,144 @@
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "38ff1f35f228ad512963e79feefaf847", "employeeId": 68444}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "73a674c6f20f728524a76e70e3155023", "employeeId": 106994}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "aaef150141ea849230648e00e8350380", "employeeId": 108856}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "302905f1793852201986ff4b66b0662a", "employeeId": 136304}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "ee43acbbbc7b0422ee31765901fd6d41", "employeeId": 111651}
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "901c7fb01aae7530c113f4ad0d5857e3", "employeeId": 117269}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "ed992892e9a640f392956f9badf56499", "employeeId": 74858}
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "0f8353dbfcceb45c256ad4168b11e75c", "employeeId": 159812}
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "38ff1f35f228ad512963e79feefaf847", "employeeId": 68444}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "73a674c6f20f728524a76e70e3155023", "employeeId": 106994}
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "901c7fb01aae7530c113f4ad0d5857e3", "employeeId": 117269}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "aaef150141ea849230648e00e8350380", "employeeId": 108856}
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "302905f1793852201986ff4b66b0662a", "employeeId": 136304}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "0f8353dbfcceb45c256ad4168b11e75c", "employeeId": 159812}
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "ed992892e9a640f392956f9badf56499", "employeeId": 74858}
+{"commandType": "aiEnterRoom", "roomId": 101550, "accessKey": "ee43acbbbc7b0422ee31765901fd6d41", "employeeId": 111651}
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'
+Traceback (most recent call last):
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 78, in <module>
+    hello('wss://tank-match.taobao.com/ai'))
+  File "/Users/cijian/anaconda/lib/python3.6/asyncio/base_events.py", line 466, in run_until_complete
+    return future.result()
+  File "/Users/cijian/CLionProjects/tank/tank_ai/robot-1.py", line 59, in hello
+    angle = getAngle(tanks[sys.argv[3]]['position'][0], tanks[sys.argv[3]]['position'][1], tanks['ai:58']['position'][0], tanks['ai:58']['position'][1])
+KeyError: 'ai:58'

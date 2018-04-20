@@ -71,7 +71,7 @@ double trueMapHeight = 15; // 真实地图长度
 
 // 2,200  和 5，400 都还不错
 int searchStepLength = 3; // 探索步长
-int maxExploreNumber = 600;
+int maxExploreNumber = 400;
 
 double bulletDWideMultiple = 1.4; // 子弹的宽度，相应扩宽一点
 float tDDistance = 6; // 坦克的伤害半径
@@ -833,7 +833,7 @@ inline void solve() {
     auto tBClock= get_time::now();
 
     AttackObject *ao = canXYAttack(myTank->x, myTank->y);
-    if (myTank->canFire() && !myTank->isDied()) {
+    if (!myTank->isDied()) {
         if (ao != nullptr && ao->canAttack == true) {
             direction(ao->angle);
             fire();
